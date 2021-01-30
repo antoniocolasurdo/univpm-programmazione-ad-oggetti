@@ -1,11 +1,5 @@
 package it.univpm.progetto.runner;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.MalformedURLException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
+import it.univpm.progetto.utils.Costanti;
+import it.univpm.progetto.utils.FileUtils;
 
 
 /**
@@ -29,19 +26,6 @@ public class CaricamentoIniziale implements CommandLineRunner {
 	private static final Logger LOG = LoggerFactory.getLogger(CaricamentoIniziale.class);
 
     /**
-    * Definizione dei parametri di accesso agli eventi del sito Ticket Master richiesto nel progetto
-    */
-    private final static String TICKET_MASTER_URL = "https://app.ticketmaster.com/discovery/v2/events.json";
-    private final static String COUNTRY_FILTER = "US";
-    private final static String API_KEY = "pgAP0yglhrdbzvXSQem3WrDfGpwywPaw";
-
-    /**
-    * Definizione della cartella e del nome file sul quale vengono scritti gli eventi recuperati da Ticker Master
-    */
-    private final static String RESOURCE_PATH = "src/main/resources";
-    private final static String RESOURCE_FILENAME = "/ticket_master_events.json";
-    
-    /**
     * Oggetto RestTemplate utilizzato per accedere all'API Get messa a disposizione da Ticket Master
     */
     @Autowired
@@ -52,13 +36,21 @@ public class CaricamentoIniziale implements CommandLineRunner {
     */
     @Override
     public void run(String...args) throws Exception {
-    	if (!fileExist()) {
+    	if (!FileUtils.fileExist()) {
+    		LOG.info("Caricamento dati da Ticket Master ...");
         	ResponseEntity<String> response = restTemplate.getForEntity(getTicketMasterUrl(), String.class);
 
         	if (response.getStatusCode() == HttpStatus.OK) {
         		String ticketMasterJson = response.getBody();
-        		saveFile(ticketMasterJson.getBytes());
+        		FileUtils.saveFile(ticketMasterJson.getBytes());
+        		LOG.info("Caricamento dati da Ticket Master avvenuto correttamente!");
         	}
+        	else {
+        		LOG.error("Errore nel recupero dei dati da Ticket Master, statusCode: " + response.getStatusCodeValue());
+        	}
+    	}
+    	else {
+    		LOG.info("File JSON già presente!");
     	}
     }
     
@@ -68,37 +60,10 @@ public class CaricamentoIniziale implements CommandLineRunner {
     private String getTicketMasterUrl() {
     	String result = "";
     	
-    	result += TICKET_MASTER_URL;
-    	result += "?countryCode=" + COUNTRY_FILTER;
-    	result += "&apikey=" + API_KEY;
+    	result += Costanti.TICKET_MASTER_URL;
+    	result += "?countryCode=" + Costanti.COUNTRY_FILTER;
+    	result += "&apikey=" + Costanti.API_KEY;
     	
     	return result;
     }
-
-    /**
-    * Funzione di verifica se il file contenente gli eventi di Ticket Master esiste o meno
-    */
-    private boolean fileExist() {
-    	File file = new File(RESOURCE_PATH + RESOURCE_FILENAME);
-    	
-    	return file.exists();
-    }
-    
-    /**
-    * Funzione di salvataggio del file all'interno della struttura del progetto
-    */
-	private String saveFile(byte[] bytes) throws MalformedURLException, IOException {
-		File file = new File(RESOURCE_PATH + RESOURCE_FILENAME);
-		    
-		OutputStream out = new FileOutputStream(file);
-		try {
-		    out.write(bytes);
-		} catch (Exception e) {
-			LOG.error(e.getMessage());
-		} finally {
-		    out.close();
-		}
-		
-		return file.getName();
-	}
 }
