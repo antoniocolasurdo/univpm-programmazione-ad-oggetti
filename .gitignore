@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Add MAC additional files
+.DS_Store
