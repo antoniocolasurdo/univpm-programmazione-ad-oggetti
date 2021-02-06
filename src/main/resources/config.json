@@ -1,0 +1,7 @@
+{ 
+	"TICKET_MASTER_URL": "https://app.ticketmaster.com/discovery/v2/events.json",
+	"TICKET_MASTER_FILTER": "country=\"US\"",
+	"TICKET_MASTER_API_KEY": "apikey=pgAP0yglhrdbzvXSQem3WrDfGpwywPaw",
+	"PAGES": 5,
+	"SIZE": 200
+}

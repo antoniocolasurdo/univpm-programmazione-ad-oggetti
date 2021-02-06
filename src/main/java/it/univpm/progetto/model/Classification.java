@@ -7,10 +7,6 @@ package it.univpm.progetto.model;
 public class Classification {
 	
 	/**
-	 * Definisce se è un evento principale
-	 */
-	private boolean primary;
-	/**
 	 * Definisce il segmento di classificazione
 	 */
 	private Segment segment;
@@ -22,25 +18,13 @@ public class Classification {
 	 * Definisce il sottogenere dell'evento
 	 */
 	private SubGenre subGenre;
-	/**
-	 * Definisce il tipo di evento
-	 */
-	private Type type;
-	/**
-	 * Definisce il sottotipo di evento
-	 */
-	private SubType subType;
-	/**
-	 * Definisce se l'evento è per famiglie
-	 */
-	private boolean family;
 
-	public boolean isPrimary() {
-		return primary;
+	public Classification() {
+		segment = new Segment();
+		genre = new Genre();
+		subGenre = new SubGenre();
 	}
-	public void setPrimary(boolean primary) {
-		this.primary = primary;
-	}
+	
 	public Segment getSegment() {
 		return segment;
 	}
@@ -58,24 +42,6 @@ public class Classification {
 	}
 	public void setSubGenre(SubGenre subGenre) {
 		this.subGenre = subGenre;
-	}
-	public Type getType() {
-		return type;
-	}
-	public void setType(Type type) {
-		this.type = type;
-	}
-	public SubType getSubType() {
-		return subType;
-	}
-	public void setSubType(SubType subType) {
-		this.subType = subType;
-	}
-	public boolean isFamily() {
-		return family;
-	}
-	public void setFamily(boolean family) {
-		this.family = family;
 	}
 
 }

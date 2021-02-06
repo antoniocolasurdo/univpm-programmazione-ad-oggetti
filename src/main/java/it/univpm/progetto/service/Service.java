@@ -8,4 +8,9 @@ public interface Service {
 	 * @return prova
 	 */
 	public String getData();
+
+	/**
+	 * Metodo di recupero dei dati da Ticket Master
+	 */
+	public void readData();
 }

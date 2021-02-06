@@ -1,60 +1,39 @@
 package it.univpm.progetto.model;
 
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * @author Antonio Colasurdo e Daniele Sergiacomi
  * Classe che definisce le date degli eventi
  */
 public class Dates {
-	/**
-	 * Definisce l'inizio dell'evento
-	 */
-	private Start start;
-	/**
-	 * Definisce la data dell'inizio dell'evento
-	 */
-	private StartDate initialStartDate;
-	/**
-	 * Definisce il fuso orario
-	 */
-	private String timezone;
-	/**
-	 * Definisce lo stato dell'evento
-	 */
-	private Status status;
-	/**
-	 * Definisce se si estende per più giorni
-	 */
-	private boolean spanMultipleDays;
 
-	public Start getStart() {
-		return start;
+	private LocalDate localDate;
+	private LocalTime localTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+	private DateTime dateTime;
+
+    public LocalDate getLocalDate() {
+		return localDate;
 	}
-	public void setStart(Start start) {
-		this.start = start;
+	public void setLocalDate(LocalDate localDate) {
+		this.localDate = localDate;
 	}
-	public StartDate getInitialStartDate() {
-		return initialStartDate;
+	public LocalTime getLocalTime() {
+		return localTime;
 	}
-	public void setInitialStartDate(StartDate initialStartDate) {
-		this.initialStartDate = initialStartDate;
+	public void setLocalTime(LocalTime localTime) {
+		this.localTime = localTime;
 	}
-	public String getTimezone() {
-		return timezone;
+	public DateTime getDateTime() {
+		return dateTime;
 	}
-	public void setTimezone(String timezone) {
-		this.timezone = timezone;
-	}
-	public Status getStatus() {
-		return status;
-	}
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-	public boolean isSpanMultipleDays() {
-		return spanMultipleDays;
-	}
-	public void setSpanMultipleDays(boolean spanMultipleDays) {
-		this.spanMultipleDays = spanMultipleDays;
+	public void setDateTime(DateTime dateTime) {
+		this.dateTime = dateTime;
 	}
 
 }

@@ -6,14 +6,6 @@ package it.univpm.progetto.model;
  */
 public class PriceRange {
 	
-	/**
-	 * Definisce il tipo
-	 */
-	private String type;
-	/**
-	 * Definisce la moneta
-	 */
-    private String currency;
     /**
      * Definisce il prezzo minimo
      */
@@ -23,18 +15,6 @@ public class PriceRange {
      */
     private float max;
 
-    public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	public String getCurrency() {
-		return currency;
-	}
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
 	public float getMin() {
 		return min;
 	}
