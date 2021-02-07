@@ -19,7 +19,9 @@ public class Controller {
 	private Service service;
 
 	/**
+	 * <p>
 	 * Rotta che permette di leggere i dati da TicketMaster e crea la struttura degli eventi con attribbuti e proprietà richieste dalle specifiche di progetto
+	 * <p>
 	 */
 	
 	@PostMapping("/readData")
@@ -27,12 +29,21 @@ public class Controller {
 		service.readData();
 	}
 
+	/**
+	 * <p>
+	 * Rotta che permette di recuperare i metadati 
+	 * <p>
+	 */
 	@GetMapping("/getMetaData")
 	public JsonNode getMetaData() {
 		return service.getMetaData();
 	}
 
-
+	/**
+	 * <p>
+	 * Rotta che permette di recuperare i dati di tutti gli eventi letti da TicketMaster
+	 * <p>
+	 */
 	@GetMapping("/getData")
 	public List<Event> getData() {
 		return service.getData();

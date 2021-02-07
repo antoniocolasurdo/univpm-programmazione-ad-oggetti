@@ -18,6 +18,7 @@ public class UnivpmProgrammazioneAdOggettiApplication {
 	}
 
 	/**
+	 * @see https://www.baeldung.com/
 	 * Oggetto RestTemplate utilizzato per accedere all'API Get messa a disposizione da Ticket Master
 	 */
 	
