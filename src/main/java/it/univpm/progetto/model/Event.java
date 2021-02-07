@@ -33,7 +33,7 @@ public class Event {
 	 */
 	private List<PriceRange> priceRanges;
 	/**
-	 * Definisce la lista delle città
+	 * Definisce la lista delle sedi degli eventi
 	 */
 	private List<Venue> venues;
 	

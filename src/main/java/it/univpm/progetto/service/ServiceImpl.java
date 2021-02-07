@@ -2,9 +2,11 @@ package it.univpm.progetto.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
@@ -17,6 +19,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import it.univpm.progetto.model.*;
 
 @org.springframework.stereotype.Service
@@ -66,19 +71,12 @@ public class ServiceImpl implements Service {
 			TICKET_MASTER_API_KEY = configNode.get("TICKET_MASTER_API_KEY").asText();
 			PAGES = configNode.get("PAGES").asInt();
 			SIZE = configNode.get("SIZE").asInt();
-
-			//events = objectMapper.readValue(ticketMasterEventsJson, Root.class);
 		} catch (Exception ex) {
 			LOG.error(ex.getMessage());
 		}
 		
 	}
 	
-	@Override
-	public String getData() {
-		return "Prova";
-	}
-
 	@Override
 	public void readData() {
 		
@@ -97,6 +95,59 @@ public class ServiceImpl implements Service {
     	}
 		LOG.info("Caricamento dati da Ticket Master avvenuto correttamente!");
 
+	}
+
+	@Override
+	public JsonNode getMetaData() {
+
+		return processClass(Event.class);
+
+	}
+
+	private ObjectNode processClass(Class<?> classe) {
+
+		ObjectNode objectNode = objectMapper.createObjectNode();
+		
+		Field[] fields = classe.getDeclaredFields();
+		for (Field field : fields) {
+			
+			if (field.getType().getSimpleName().equals("List")) {
+				Type type = field.getGenericType();
+				if (type instanceof ParameterizedType) {
+				    Type elementType = ((ParameterizedType) type).getActualTypeArguments()[0];
+				    ArrayNode arrayNode = objectNode.putArray(field.getName());
+				    ObjectNode listObjectNode = objectMapper.createObjectNode();
+				    listObjectNode.set(((Class<?>)elementType).getSimpleName(), processClass((Class<?>)elementType));
+				    arrayNode.add(listObjectNode);
+				}
+			} else {
+				if (field.getType().getSimpleName().equals("Dates") || field.getType().getSimpleName().equals("Segment") || 
+						field.getType().getSimpleName().equals("Genre") || field.getType().getSimpleName().equals("SubGenre")) {
+					ObjectNode subNode = objectMapper.createObjectNode();
+					subNode.set(field.getType().getSimpleName(), processClass(field.getType()));
+					objectNode.set(field.getName(), subNode);
+				} else {
+					objectNode.put(field.getName(), field.getType().getSimpleName());
+				}
+			}
+			
+		}
+		
+		if (classe.getSuperclass() != null && classe.getSuperclass().getDeclaredFields().length > 0) {
+			Field[] superClassFields = classe.getSuperclass().getDeclaredFields();
+			for (Field superClassfield : superClassFields) {
+				objectNode.put(superClassfield.getName(), superClassfield.getType().getSimpleName());
+			}
+			
+		}
+		
+		return objectNode;
+
+	}
+	
+	@Override
+	public List<Event> getData() {
+		return events;
 	}
 
 	
