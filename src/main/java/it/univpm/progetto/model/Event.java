@@ -14,7 +14,6 @@ public class Event {
 
 	private String name;
 
-	private String id;
 
 	private Dates dates;
 
@@ -54,7 +53,6 @@ public class Event {
 	public Event(String name, String id, String info) {
 		this();
 		this.name = name;
-		this.id = id;
 		this.info = info;
 	}
 	/**
@@ -73,23 +71,6 @@ public class Event {
 	 */
 	public void setName(String name) {
 		this.name = name;
-	}
-	/**
-	 * <p>
-	 * Ritorna l'id dell'evento
-	 * @return id
-	 * <p>
-	 */
-	public String getId() {
-		return id;
-	}
-	/**
-	 * 
-	 * @param id indica l'id dell'evento
-	 * 
-	 */
-	public void setId(String id) {
-		this.id = id;
 	}
 	/**
 	 * <p>
