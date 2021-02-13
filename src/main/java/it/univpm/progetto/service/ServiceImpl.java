@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import it.univpm.progetto.exception.CustomException;
 import it.univpm.progetto.model.*;
 /*
  * 
@@ -97,9 +98,10 @@ public class ServiceImpl implements Service {
      * <p>
     * funzione di lettura dati per leggere i dati di TicketMaster di un numero <i>PAGES</i> di pagine
     * <p>
+	 * @throws Exception 
     */
 	@Override
-	public void readData() {
+	public void readData() throws CustomException {
 		
 		// Eseguo ciclo in funzione del numero di pagine
     	for (int index = 0; index < PAGES; index ++) {
@@ -128,7 +130,7 @@ public class ServiceImpl implements Service {
     * <p>
     */
 	@Override
-	public JsonNode getMetaData() {
+	public JsonNode getMetaData() throws CustomException {
 
 		return processClass(Event.class);
 
@@ -194,7 +196,7 @@ public class ServiceImpl implements Service {
      * <p>
      */
 	@Override
-	public List<Event> getData() {
+	public List<Event> getData() throws CustomException {
 		return events;
 	}
 
@@ -221,7 +223,7 @@ public class ServiceImpl implements Service {
 	 * Funzione di elaborazione dei dati della pagina inserendo i record recuperati nel modello dati
 	 * <p>
 	 */
-	private void processPage(String ticketMasterData) {
+	private void processPage(String ticketMasterData) throws CustomException {
 		
 		try {
 			// Elaboro il nodo radice
@@ -250,14 +252,20 @@ public class ServiceImpl implements Service {
 								JsonNode datesNode = eventNode.get("dates");
 								if (datesNode.has("start")) {
 									JsonNode startNode = datesNode.get("start");
-									if (startNode.hasNonNull("localDate")) {
-										event.getDates().setLocalDate(LocalDate.parse(startNode.get("localDate").asText()));
+									if (startNode.has("localDate")) {
+										if (startNode.get("localDate").asText() != null) {
+											event.getDates().setLocalDate(LocalDate.parse(startNode.get("localDate").asText()));
+										}
 									}
-									if (startNode.hasNonNull("localTime")) {
-										event.getDates().setLocalTime(LocalTime.parse(startNode.get("localTime").asText()));
+									if (startNode.has("localTime")) {
+										if (startNode.get("localTime").asText() != null) {
+											event.getDates().setLocalTime(LocalTime.parse(startNode.get("localTime").asText()));
+										}
 									}
-									if (startNode.hasNonNull("dateTime")) {
-										event.getDates().setDateTime(DateTime.parse(startNode.get("dateTime").asText()));
+									if (startNode.has("dateTime")) {
+										if (startNode.get("dateTime").asText() != null) {
+											event.getDates().setDateTime(DateTime.parse(startNode.get("dateTime").asText()));
+										}
 									}
 								}
 							}
@@ -266,22 +274,46 @@ public class ServiceImpl implements Service {
 							if (eventNode.has("classifications")) {
 								JsonNode classificationsNode = eventNode.get("classifications");
 								for (JsonNode classificationNode : classificationsNode) {
-									Classification classification = new Classification();
-									
 									if (classificationNode.has("segment")) {
-									    classification.getSegment().setId(classificationNode.get("segment").get("id").asText());
-									    classification.getSegment().setName(classificationNode.get("segment").get("name").asText());
+										JsonNode segmentNode = classificationNode.get("segment");
+										String id = segmentNode.get("id").asText();
+										String name = segmentNode.get("name").asText();
+										switch (name) {
+											case "Music":
+											{
+												event.getSegments().add(new MusicSegment(id));
+												break;
+											}
+											case "Arts & Theatre":
+											{
+												event.getSegments().add(new ArtsAndTheatreSegment(id));
+												break;
+											}
+											case "Sports":
+											{
+												event.getSegments().add(new SportsSegment(id));
+												break;
+											}
+											case "Miscellaneous":
+											{
+												event.getSegments().add(new MiscellaneousSegment(id));
+												break;
+											}
+										}
 									}
 									if (classificationNode.has("genre")) {
-									    classification.getSegment().setId(classificationNode.get("genre").get("id").asText());
-									    classification.getSegment().setName(classificationNode.get("genre").get("name").asText());
+										JsonNode genreNode = classificationNode.get("genre");
+										String id = genreNode.get("id").asText();
+										String name = genreNode.get("name").asText();
+										event.getGenres().add(new Genre(id, name));
 									}
 									if (classificationNode.has("subGenre")) {
-									    classification.getSegment().setId(classificationNode.get("subGenre").get("id").asText());
-									    classification.getSegment().setName(classificationNode.get("subGenre").get("name").asText());
+										JsonNode subGenreNode = classificationNode.get("subGenre");
+										String id = subGenreNode.get("id").asText();
+										String name = subGenreNode.get("name").asText();
+										event.getSubgenres().add(new SubGenre(id, name));
 									}
 									
-									event.getClassifications().add(classification);
 								}
 							}
 
@@ -328,6 +360,7 @@ public class ServiceImpl implements Service {
 			}
 		} catch (IOException ex) {
 			LOG.error(ex.getMessage());
+			throw new CustomException("Errore nel caricamento della pagina!");
 		}
 
 	}

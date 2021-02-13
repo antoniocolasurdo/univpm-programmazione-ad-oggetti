@@ -18,7 +18,11 @@ public class Event {
 
 	private Dates dates;
 
-	private List<Classification> classifications;
+	private List<Segment> segments;
+	
+	private List<Genre> genres;
+	
+	private List<SubGenre> subgenres;
 
 	private String info;
 
@@ -33,7 +37,9 @@ public class Event {
 	 */
 	public Event() {
 		dates = new Dates();
-		classifications = new ArrayList<Classification>();
+		segments = new ArrayList<Segment>();
+		genres = new ArrayList<Genre>();
+		subgenres = new ArrayList<SubGenre>();
 		priceRanges = new ArrayList<PriceRange>();
 		venues = new ArrayList<Venue>();
 	}
@@ -46,7 +52,7 @@ public class Event {
 	 * <p>
 	 */
 	public Event(String name, String id, String info) {
-		super();
+		this();
 		this.name = name;
 		this.id = id;
 		this.info = info;
@@ -102,23 +108,26 @@ public class Event {
 	public void setDates(Dates dates) {
 		this.dates = dates;
 	}
-	/**
-	 * <p>
-	 * Ritorna la lista delle classificazioni dell'evento
-	 * @return classifications
-	 * <p>
-	 */
-	public List<Classification> getClassifications() {
-		return classifications;
+
+	public List<Segment> getSegments() {
+		return segments;
 	}
-	/**
-	 * 
-	 * @param classifications indica la lista delle classificazioni
-	 * 
-	 */
-	public void setClassifications(List<Classification> classifications) {
-		this.classifications = classifications;
+	public void setSegments(List<Segment> segments) {
+		this.segments = segments;
 	}
+	public List<Genre> getGenres() {
+		return genres;
+	}
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
+	}
+	public List<SubGenre> getSubgenres() {
+		return subgenres;
+	}
+	public void setSubgenres(List<SubGenre> subgenres) {
+		this.subgenres = subgenres;
+	}
+
 	/**
 	 * <p>
 	 * Ritorna le info dell'evento
