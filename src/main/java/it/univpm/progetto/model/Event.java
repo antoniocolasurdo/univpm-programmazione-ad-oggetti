@@ -12,8 +12,9 @@ import java.util.List;
  */
 public class Event {
 
+	private String id;
+	
 	private String name;
-
 
 	private Dates dates;
 
@@ -52,10 +53,27 @@ public class Event {
 	 */
 	public Event(String name, String id, String info) {
 		this();
+		this.id = id;
 		this.name = name;
 		this.info = info;
 	}
 	/**
+	 * <p>
+	 * Ritorna l'id dell'evento
+	 * @return id
+	 * <p>
+	 */
+	public String getId() {
+		return id;
+	}
+	/**
+	 * 
+	 * @param id indica l'id dell'evento
+	 * 
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}	/**
 	 * <p>
 	 * Ritorna il nome dell'evento
 	 * @return name

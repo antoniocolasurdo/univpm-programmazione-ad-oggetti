@@ -14,43 +14,63 @@ import org.joda.time.LocalTime;
 public class Dates {
 
 
-	private String Date;
+	private LocalDate localDate;
 
-	private String Time;
-
+	private LocalTime localTime;
+	
+	private DateTime dateTime;
 
 	/**
 	 * <p>
 	 * Ritorna la data locale dell'evento
-	 * @return Date
+	 * @return LocalDate
 	 * <p>
 	 */
-    public String getDate() {
-		return Date;
+	public LocalDate getLocalDate() {
+		return localDate;
 	}
     /**
 	 * 
 	 * @param localDate indica la data dell'evento
 	 * 
 	 */
-	public void setDate(String Date) {
-		this.Date = Date;
+	public void setLocalDate(LocalDate localDate) {
+		this.localDate = localDate;
 	}
 	/**
 	 * <p>
 	 * Ritorna l'orario locale dell'evento
-	 * @return Time
+	 * @return LocalTime
 	 * <p>
 	 */
-	public String getTime() {
-		return Time;
+	public LocalTime getLocalTime() {
+		return localTime;
 	}
 	/**
 	 * 
-	 * @param Time indica l'orario dell'evento
+	 * @param LocalTime indica l'orario dell'evento
 	 * 
 	 */
-	public void setTime(String Time) {
-		this.Time = Time;
+	public void setLocalTime(LocalTime localTime) {
+		this.localTime = localTime;
 	}
+	
+	/**
+	 * <p>
+	 * Ritorna la data e l'orario dell'evento
+	 * @return dateTime
+	 * <p>
+	 */
+	public DateTime getDateTime() {
+		return dateTime;
+	}
+	/**
+	 * 
+	 * @param dateTime indica la data e l'orario dell'evento
+	 * 
+	 */
+	public void setDateTime(DateTime dateTime) {
+		this.dateTime = dateTime;
+	}
+
 }
