@@ -4,47 +4,28 @@ package it.univpm.progetto.model;
  * @author Antonio Colasurdo e Daniele Sergiacomi
  * 
  * <p>
- * <b>Classe</b> astratta che definisce l'id e il nome
+ * <b>Classe</b> che definisce il sottogenere dell'evento e che estende la classe <i>IdName</i>
  * <p>
  */
-public abstract class IdName {
-	
-	
-	private String id;
+public class SubGenre {
 
+	private String id;
 	private String name;
 
-	/**
-	 * <p>
-	 * Ritorna l'id
-	 * @return id
-	 * <p>
-	 */
+	public SubGenre(String id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	
 	public String getId() {
 		return id;
 	}
-	/**
-	 * 
-	 * @param id indica l'id
-	 * 
-	 */
 	public void setId(String id) {
 		this.id = id;
 	}
-	/**
-	 * <p>
-	 * Ritorna il nome
-	 * @return name
-	 * <p>
-	 */
 	public String getName() {
 		return name;
 	}
-	/**
-	 * 
-	 * @param name indica il nome
-	 * 
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}

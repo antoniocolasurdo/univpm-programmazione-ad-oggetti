@@ -4,16 +4,15 @@ package it.univpm.progetto.model;
  * @author Antonio Colasurdo e Daniele Sergiacomi
  * 
  * <p>
- * <b>Classe</b> che definisce il genere dell'evento e che estende la classe <i>IdName</i>
+ * <b>Classe</b> che definisce il segmento di classificazione e che estende la classe <i>IdName</i>
  * <p>
  */
-public class Genre {
+public abstract class Segment {
 
 	private String id;
 	private String name;
-
-	public Genre(String id, String name) {
-		this.id = id;
+	
+	public Segment(String name) {
 		this.name = name;
 	}
 	
