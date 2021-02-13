@@ -7,7 +7,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
@@ -145,7 +144,7 @@ public class ServiceImpl implements Service {
 		Field[] fields = classe.getDeclaredFields();
 		for (Field field : fields) {
 			
-			// Se la proprietà è una List<?> recupero il tipo di dato
+			// Se la proprietà è una List<T> recupero il tipo di dato nella lista
 			if (field.getType().getSimpleName().equals("List")) {
 				Type type = field.getGenericType();
 				if (type instanceof ParameterizedType) {
@@ -161,9 +160,7 @@ public class ServiceImpl implements Service {
 				}
 			} else {
 				// Verifica se la proprietà è un oggetto appartenente alle classi del model
-				if (field.getType().getSimpleName().equals("Dates") || field.getType().getSimpleName().equals("Segment") || 
-						field.getType().getSimpleName().equals("Genre") || field.getType().getSimpleName().equals("SubGenre")) {
-					
+				if (field.getType().getSimpleName().equals("Dates")) {
 					// Creo un sottonodo con le proprietà contenute nella corrispondente classe
 					ObjectNode subNode = objectMapper.createObjectNode();
 					subNode.set(field.getType().getSimpleName(), processClass(field.getType()));
@@ -241,119 +238,147 @@ public class ServiceImpl implements Service {
 
 						// Ciclo su ogni evento recuperato
 						for (JsonNode eventNode : eventsNode) {
-							Event event = new Event(
-									eventNode.get("name").asText(),
-									eventNode.get("id").asText(),
-									eventNode.hasNonNull("info") ? eventNode.get("info").asText() : null
-									);
+							
+							// Leggo le proprietà principali
+							String eventId = eventNode.get("id").asText();
+							String eventName = eventNode.get("name").asText();
+							String eventInfo = eventNode.hasNonNull("info") ? eventNode.get("info").asText() : null;
+							boolean eventFamily = false;
 							
 							// Elaborazione del sottoramo dates contenente le date dell'evento
+							LocalDate localDate = null;
+							LocalTime localTime = null;
 							if (eventNode.has("dates")) {
 								JsonNode datesNode = eventNode.get("dates");
 								if (datesNode.has("start")) {
 									JsonNode startNode = datesNode.get("start");
 									if (startNode.has("localDate")) {
 										if (startNode.get("localDate").asText() != null) {
-											event.getDates().setLocalDate(LocalDate.parse(startNode.get("localDate").asText()));
+											localDate = LocalDate.parse(startNode.get("localDate").asText());
 										}
 									}
 									if (startNode.has("localTime")) {
 										if (startNode.get("localTime").asText() != null) {
-											event.getDates().setLocalTime(LocalTime.parse(startNode.get("localTime").asText()));
-										}
-									}
-									if (startNode.has("dateTime")) {
-										if (startNode.get("dateTime").asText() != null) {
-											event.getDates().setDateTime(DateTime.parse(startNode.get("dateTime").asText()));
+											localTime = LocalTime.parse(startNode.get("localTime").asText());
 										}
 									}
 								}
 							}
-
-							// Elaborazione del sottoramo classifications
-							if (eventNode.has("classifications")) {
-								JsonNode classificationsNode = eventNode.get("classifications");
-								for (JsonNode classificationNode : classificationsNode) {
-									if (classificationNode.has("segment")) {
-										JsonNode segmentNode = classificationNode.get("segment");
-										String id = segmentNode.get("id").asText();
-										String name = segmentNode.get("name").asText();
-										switch (name) {
-											case "Music":
-											{
-												event.getSegments().add(new MusicSegment(id));
-												break;
-											}
-											case "Arts & Theatre":
-											{
-												event.getSegments().add(new ArtsAndTheatreSegment(id));
-												break;
-											}
-											case "Sports":
-											{
-												event.getSegments().add(new SportsSegment(id));
-												break;
-											}
-											case "Miscellaneous":
-											{
-												event.getSegments().add(new MiscellaneousSegment(id));
-												break;
-											}
-										}
-									}
-									if (classificationNode.has("genre")) {
-										JsonNode genreNode = classificationNode.get("genre");
-										String id = genreNode.get("id").asText();
-										String name = genreNode.get("name").asText();
-										event.getGenres().add(new Genre(id, name));
-									}
-									if (classificationNode.has("subGenre")) {
-										JsonNode subGenreNode = classificationNode.get("subGenre");
-										String id = subGenreNode.get("id").asText();
-										String name = subGenreNode.get("name").asText();
-										event.getSubgenres().add(new SubGenre(id, name));
-									}
-									
-								}
-							}
+							Dates dates = new Dates(localDate, localTime);
 
 							// Elaborazione del sottoramo priceRanges
+							JsonNode priceRangesNode = null;
 							if (eventNode.has("priceRanges")) {
-								JsonNode priceRangesNode = eventNode.get("priceRanges");
-								for (JsonNode priceRangeNode : priceRangesNode) {
-									PriceRange priceRange = new PriceRange();
-									
-									priceRange.setMin(priceRangeNode.get("min").floatValue());
-									priceRange.setMax(priceRangeNode.get("max").floatValue());
-									
-									event.getPriceRanges().add(priceRange);
-								}								
+								priceRangesNode = eventNode.get("priceRanges");
 							}
 
 							// Nel ramo _emdebbed vi sono gli altri oggetti dichiarati nel data model di Ticket Master
+							JsonNode venuesNode = null;
 							if (eventNode.has("_embedded")) {
 								JsonNode embeddedEventNode = eventNode.get("_embedded");
 								
 								// Elaborazione del sottonodo venues contenente un'array di località in cui si svolge l'evento
 								if (embeddedEventNode.has("venues")) {
-									JsonNode venuesNode = embeddedEventNode.get("venues");
-									
-									for (JsonNode venueNode : venuesNode) {
-										Venue venue = new Venue();
+									venuesNode = embeddedEventNode.get("venues");
+								}
+							}
+
+							// Elaborazione del sottoramo classifications e verifico se la tipologia è Music, Sport, ArtsAndThaetre e Miscellaneous
+							if (eventNode.has("classifications")) {
+								JsonNode classificationsNode = eventNode.get("classifications");
+								for (JsonNode classificationNode : classificationsNode) {
+
+									// Leggo se evento per famiglia
+									if (classificationNode.has("family")) {
+										eventFamily = classificationNode.get("family").asBoolean();
+									}
+
+									// Leggo il genere ed il sottogenere
+									String genre = null;
+									String subGenre = null;
+
+									if (classificationNode.has("genre")) {
+										JsonNode genreNode = classificationNode.get("genre");
+										genre = genreNode.get("name").asText();
+									}
+									if (classificationNode.has("subGenre")) {
+										JsonNode subGenreNode = classificationNode.get("subGenre");
+										subGenre = subGenreNode.get("name").asText();
+									}
+
+									if (classificationNode.has("segment")) {
+										JsonNode segmentNode = classificationNode.get("segment");
+										String segmentName = segmentNode.get("name").asText();
 										
-										venue.setCityName(venueNode.get("city").get("name").asText());
-										if (venueNode.hasNonNull("state")) {
-											venue.setStateName(venueNode.get("state").get("name").asText());
-											venue.setStateCode(venueNode.get("state").get("stateCode").asText());
+										switch (segmentName) {
+											case "Music":
+											{
+												MusicEvent musicEvent = new MusicEvent(eventId, eventName, eventInfo, eventFamily, genre, subGenre);
+												if (dates != null)
+												{
+													musicEvent.setDates(dates);
+												}
+												if (priceRangesNode != null) {
+													processPriceRanges(musicEvent, priceRangesNode);
+												}
+												if (venuesNode != null) {
+													processVenues(musicEvent, venuesNode);
+												}
+												events.add(musicEvent);
+												break;
+											}
+											case "Arts & Theatre":
+											{
+												ArtsAndTheatreEvent artsAndTheatreEvent = new ArtsAndTheatreEvent(eventId, eventName, eventInfo, eventFamily, genre, subGenre);
+												if (dates != null)
+												{
+													artsAndTheatreEvent.setDates(dates);
+												}
+												if (priceRangesNode != null) {
+													processPriceRanges(artsAndTheatreEvent, priceRangesNode);
+												}
+												if (venuesNode != null) {
+													processVenues(artsAndTheatreEvent, venuesNode);
+												}
+												events.add(artsAndTheatreEvent);
+												break;
+											}
+											case "Sports":
+											{
+												SportEvent sportEvent = new SportEvent(eventId, eventName, eventInfo, eventFamily, genre);
+												if (dates != null)
+												{
+													sportEvent.setDates(dates);
+												}
+												if (priceRangesNode != null) {
+													processPriceRanges(sportEvent, priceRangesNode);
+												}
+												if (venuesNode != null) {
+													processVenues(sportEvent, venuesNode);
+												}
+												events.add(sportEvent);
+												break;
+											}
+											case "Miscellaneous":
+											{
+												MiscellaneousEvent miscellaneousEvent = new MiscellaneousEvent(eventId, eventName, eventInfo, eventFamily, genre);
+												if (dates != null)
+												{
+													miscellaneousEvent.setDates(dates);
+												}
+												if (priceRangesNode != null) {
+													processPriceRanges(miscellaneousEvent, priceRangesNode);
+												}
+												if (venuesNode != null) {
+													processVenues(miscellaneousEvent, venuesNode);
+												}
+												events.add(miscellaneousEvent);
+												break;
+											}
 										}
-										
-										event.getVenues().add(venue);
 									}
 								}
 							}
-							
-							// Aggiunta dell'evento elaborato alla lista degli eventi
-							events.add(event);
 						}
 					}
 				}
@@ -363,6 +388,31 @@ public class ServiceImpl implements Service {
 			throw new CustomException("Errore nel caricamento della pagina!");
 		}
 
+	}
+
+	private void processPriceRanges(Event event, JsonNode priceRangesNode) throws CustomException {
+		for (JsonNode priceRangeNode : priceRangesNode) {
+			PriceRange priceRange = new PriceRange();
+			
+			priceRange.setMin(priceRangeNode.get("min").floatValue());
+			priceRange.setMax(priceRangeNode.get("max").floatValue());
+			
+			event.getPriceRanges().add(priceRange);
+		}								
+	}
+
+	private void processVenues(Event event, JsonNode venuesNode) throws CustomException {
+		for (JsonNode venueNode : venuesNode) {
+			Venue venue = new Venue();
+			
+			venue.setCityName(venueNode.get("city").get("name").asText());
+			if (venueNode.hasNonNull("state")) {
+				venue.setStateName(venueNode.get("state").get("name").asText());
+				venue.setStateCode(venueNode.get("state").get("stateCode").asText());
+			}
+			
+			event.getVenues().add(venue);
+		}
 	}
 
 }

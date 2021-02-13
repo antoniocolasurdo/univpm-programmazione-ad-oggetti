@@ -1,6 +1,5 @@
 package it.univpm.progetto.model;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
@@ -15,11 +14,13 @@ public class Dates {
 
 
 	private LocalDate localDate;
-
 	private LocalTime localTime;
-	
-	private DateTime dateTime;
 
+	public Dates(LocalDate localDate, LocalTime localTime) {
+		this.localDate = localDate;
+		this.localTime = localTime;
+	}
+	
 	/**
 	 * <p>
 	 * Ritorna la data locale dell'evento
@@ -55,22 +56,4 @@ public class Dates {
 		this.localTime = localTime;
 	}
 	
-	/**
-	 * <p>
-	 * Ritorna la data e l'orario dell'evento
-	 * @return dateTime
-	 * <p>
-	 */
-	public DateTime getDateTime() {
-		return dateTime;
-	}
-	/**
-	 * 
-	 * @param dateTime indica la data e l'orario dell'evento
-	 * 
-	 */
-	public void setDateTime(DateTime dateTime) {
-		this.dateTime = dateTime;
-	}
-
 }

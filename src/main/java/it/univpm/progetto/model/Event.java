@@ -18,14 +18,10 @@ public class Event {
 
 	private Dates dates;
 
-	private List<Segment> segments;
-	
-	private List<Genre> genres;
-	
-	private List<SubGenre> subgenres;
-
 	private String info;
 
+	private boolean family;
+	
 	private List<PriceRange> priceRanges;
 
 	private List<Venue> venues;
@@ -36,10 +32,6 @@ public class Event {
 	 * <p>
 	 */
 	public Event() {
-		dates = new Dates();
-		segments = new ArrayList<Segment>();
-		genres = new ArrayList<Genre>();
-		subgenres = new ArrayList<SubGenre>();
 		priceRanges = new ArrayList<PriceRange>();
 		venues = new ArrayList<Venue>();
 	}
@@ -51,11 +43,12 @@ public class Event {
 	 * @param info indica l'info dell'evento
 	 * <p>
 	 */
-	public Event(String name, String id, String info) {
+	public Event(String id, String name, String info, boolean family) {
 		this();
 		this.id = id;
 		this.name = name;
 		this.info = info;
+		this.family = family;
 	}
 	/**
 	 * <p>
@@ -108,25 +101,6 @@ public class Event {
 		this.dates = dates;
 	}
 
-	public List<Segment> getSegments() {
-		return segments;
-	}
-	public void setSegments(List<Segment> segments) {
-		this.segments = segments;
-	}
-	public List<Genre> getGenres() {
-		return genres;
-	}
-	public void setGenres(List<Genre> genres) {
-		this.genres = genres;
-	}
-	public List<SubGenre> getSubgenres() {
-		return subgenres;
-	}
-	public void setSubgenres(List<SubGenre> subgenres) {
-		this.subgenres = subgenres;
-	}
-
 	/**
 	 * <p>
 	 * Ritorna le info dell'evento
@@ -143,6 +117,12 @@ public class Event {
 	 */
 	public void setInfo(String info) {
 		this.info = info;
+	}
+	public boolean isFamily() {
+		return family;
+	}
+	public void setFamily(boolean family) {
+		this.family = family;
 	}
 	/**
 	 * <p>
