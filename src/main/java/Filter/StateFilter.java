@@ -1,5 +1,5 @@
 package Filter;
 
-public class StateFilter {
+public class StateFilter extends Filter {
 
 }
