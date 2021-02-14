@@ -1,8 +1,5 @@
 package it.univpm.progetto.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author Antonio Colasurdo e Daniele Sergiacomi
  * 
@@ -22,29 +19,20 @@ public class Event {
 
 	private boolean family;
 	
-	private List<PriceRange> priceRanges;
+	private PriceRange priceRange;
 
-	private List<Venue> venues;
+	private Venue venue;
 	
 	/**
 	 * <p>
 	 * Costruttore dell'oggetto evento
-	 * <p>
-	 */
-	public Event() {
-		priceRanges = new ArrayList<PriceRange>();
-		venues = new ArrayList<Venue>();
-	}
-	/**
-	 * <p>
-	 * Costruttore dell'oggetto evento con parametri
-	 * @param name indica il nome dell'evento
 	 * @param id indica l'id dell'evento
+	 * @param name indica il nome dell'evento
 	 * @param info indica l'info dell'evento
+	 * @param family indica se l'evento è per famiglie oppure no
 	 * <p>
 	 */
 	public Event(String id, String name, String info, boolean family) {
-		this();
 		this.id = id;
 		this.name = name;
 		this.info = info;
@@ -118,6 +106,7 @@ public class Event {
 	public void setInfo(String info) {
 		this.info = info;
 	}
+
 	public boolean isFamily() {
 		return family;
 	}
@@ -126,37 +115,37 @@ public class Event {
 	}
 	/**
 	 * <p>
-	 * Ritorna la lista delle fasce di prezzo dell'evento
-	 * @return priceRanges
+	 * Ritorna la fascia di prezzo dell'evento
+	 * @return priceRange
 	 * <p>
 	 */
-	public List<PriceRange> getPriceRanges() {
-		return priceRanges;
+	public PriceRange getPriceRange() {
+		return priceRange;
 	}
 	/**
 	 * 
-	 * @param priceRanges indica la lista delle fasce di prezzo dell'evento
+	 * @param priceRange indica la fascia di prezzo dell'evento
 	 * 
 	 */
-	public void setPriceRanges(List<PriceRange> priceRanges) {
-		this.priceRanges = priceRanges;
+	public void setPriceRange(PriceRange priceRange) {
+		this.priceRange = priceRange;
 	}
 	/**
 	 * <p>
-	 * Definisce la lista delle località in cui si svolge l'evento
-	 * @return venues
+	 * Definisce la località in cui si svolge l'evento
+	 * @return venue
 	 * <p>
 	 */
-	public List<Venue> getVenues() {
-		return venues;
+	public Venue getVenue() {
+		return venue;
 	}
 	/**
 	 * 
-	 * @param venues indica la lista delle località in cui si svolge l'evento
+	 * @param venue indica la località in cui si svolge l'evento
 	 * 
 	 */
-	public void setVenues(List<Venue> venues) {
-		this.venues = venues;
+	public void setVenue(Venue venue) {
+		this.venue = venue;
 	}
 
 }
