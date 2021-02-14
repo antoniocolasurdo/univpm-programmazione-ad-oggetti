@@ -1,4 +1,4 @@
-package it.univpm.progetto.Filter;
+package it.univpm.progetto.filter;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

@@ -1,4 +1,4 @@
-package it.univpm.progetto.Filter;
+package it.univpm.progetto.filter;
 
 import java.util.Vector;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,4 +1,4 @@
-package it.univpm.progetto.Stats;
+package it.univpm.progetto.stats;
 
 import java.util.Vector;
 import com.fasterxml.jackson.databind.ObjectMapper;
