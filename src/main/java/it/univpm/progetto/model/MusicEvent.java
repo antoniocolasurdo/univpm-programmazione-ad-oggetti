@@ -1,5 +1,12 @@
 package it.univpm.progetto.model;
 
+/**
+ * @author Antonio Colasurdo e Daniele Sergiacomi
+ * 
+ * <p>
+ * <b>Classe</b> che definisce gli eventi musica
+ * <p>
+ */
 public class MusicEvent extends Event {
 
 	private String musicGenre;
@@ -11,15 +18,37 @@ public class MusicEvent extends Event {
 		this.musicSubGenre = musicSubGenre;
 	}
 	
+	/**
+	 * <p>
+	 * Ritorna il genere dell'evento di musica
+	 * @return musicGenre
+	 * <p>
+	 */
 	public String getMusicGenre() {
 		return musicGenre;
 	}
+	/**
+	 * 
+	 * @param musicGenre indica il genere dell'evento di musica
+	 * 
+	 */
 	public void setMusicGenre(String musicGenre) {
 		this.musicGenre = musicGenre;
 	}
+	/**
+	 * <p>
+	 * Ritorna il sottogenere dell'evento di musica
+	 * @return musicSubGenre
+	 * <p>
+	 */
 	public String getMusicSubGenre() {
 		return musicSubGenre;
 	}
+	/**
+	 * 
+	 * @param musicSubGenre indica il sottogenere dell'evento di musica
+	 * 
+	 */
 	public void setMusicSubGenre(String musicSubGenre) {
 		this.musicSubGenre = musicSubGenre;
 	}
