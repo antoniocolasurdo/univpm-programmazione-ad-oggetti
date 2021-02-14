@@ -391,27 +391,31 @@ public class ServiceImpl implements Service {
 	}
 
 	private void processPriceRanges(Event event, JsonNode priceRangesNode) throws CustomException {
-		for (JsonNode priceRangeNode : priceRangesNode) {
+		if (priceRangesNode.isArray()) {
+			JsonNode priceRangeNode = priceRangesNode.get(0);
 			PriceRange priceRange = new PriceRange();
 			
 			priceRange.setMin(priceRangeNode.get("min").floatValue());
 			priceRange.setMax(priceRangeNode.get("max").floatValue());
 			
-			event.getPriceRanges().add(priceRange);
+			event.setPriceRange(priceRange);
 		}								
 	}
 
 	private void processVenues(Event event, JsonNode venuesNode) throws CustomException {
-		for (JsonNode venueNode : venuesNode) {
+		if (venuesNode.isArray()) {
+			JsonNode venueNode = venuesNode.get(0);
 			Venue venue = new Venue();
 			
 			venue.setCityName(venueNode.get("city").get("name").asText());
 			if (venueNode.hasNonNull("state")) {
 				venue.setStateName(venueNode.get("state").get("name").asText());
-				venue.setStateCode(venueNode.get("state").get("stateCode").asText());
+				if (venueNode.get("state").hasNonNull("stateCode")) {
+					venue.setStateCode(venueNode.get("state").get("stateCode").asText());
+				}
 			}
 			
-			event.getVenues().add(venue);
+			event.setVenue(venue);
 		}
 	}
 
