@@ -1,44 +1,49 @@
-package Filter;
+package it.univpm.progetto.Filter;
 
+import java.util.Iterator;
+import java.util.Vector;
+import it.univpm.progetto.exception.FilterException;
+import it.univpm.progetto.model.ArtsAndTheatreEvent;
+import it.univpm.progetto.model.Event;
 import it.univpm.progetto.model.MiscellaneousEvent;
 import it.univpm.progetto.model.MusicEvent;
 import it.univpm.progetto.model.SportEvent;
-import it.univpm.progetto.model.ArtsAndTheatreEvent;
-import it.univpm.progetto.model.Event;
 
 /**
  * @author Antonio Colasurdo e Daniele Sergiacomi
  * 
- * <p>
- * <b>Classe</b> che modella il filtro sulle classificazioni (Music,Sports,Art&Theatre,Miscellaneous), sui vari generi e sottogeneri,
- * <b> estendendo la superclasse Filter. 
- * <p>
+ *<p>
+ *<b>Classe</b> che modella il filtro sulle classificazioni
+ *(Music,Sports,Art&Theatre,Miscellaneous), sui vari generi e sottogeneri,
+ *<b> estendendo la superclasse Filter.
+ *<p>
  */
 
-public class ClassificationFilter extends Filter {
+public class SegmentFilter extends Filter {
 
-	/**
-     * Attributo su cui si basa il filtraggio
+    /**
+     * TODO
+     * SEGMENTI INSERIBILI DALL'UTENTE (da mettere nel README): {sport, music, theatre, generic}
      */
-    private String Segment;
-    
+    private String segment;
+
     /**
      * Costruttore
      * 
-     * @param sewgment
+     * @param segment
      */
-    public ClassificationFilter(String segment) {
+    public SegmentFilter(String segment) {
         super();
         this.segment = segment;
     }
-    
+
     @Override
     public void filter(Vector<Event> event) {
         Iterator<Event> iter = event.iterator();
         switch (segment) {
         case "music":
             while (iter.hasNext()) {
-                Event user = iter.next(); // Prossimo utente
+                Event user = iter.next(); // Prossimo evento
                 if (!(user instanceof MusicEvent))
                     iter.remove();
             }
@@ -46,7 +51,7 @@ public class ClassificationFilter extends Filter {
 
         case "sport":
             while (iter.hasNext()) {
-                Event user = iter.next(); // Prossimo utente
+                Event user = iter.next(); // Prossimo evento
                 if (!(user instanceof SportEvent))
                     iter.remove();
             }
@@ -54,15 +59,15 @@ public class ClassificationFilter extends Filter {
 
         case "theatre":
             while (iter.hasNext()) {
-                Event user = iter.next(); // Prossimo utente
+                Event user = iter.next(); // Prossimo evento
                 if (!(user instanceof ArtsAndTheatreEvent))
                     iter.remove();
             }
             break;
-            
+
         case "miscellaneous":
             while (iter.hasNext()) {
-                Event user = iter.next(); // Prossimo utente
+                Event user = iter.next(); // Prossimo evento
                 if (!(user instanceof MiscellaneousEvent))
                     iter.remove();
             }
@@ -70,13 +75,12 @@ public class ClassificationFilter extends Filter {
         }
 
     }
-    
+
     @Override
     public void validate() {
-        if (!(tipo.equals("sport") || tipo.equals("music") || tipo.equals("theatre") || tipo.equals("miscellaneous")))
-            throw new FilterArgumentException("Tipo inserito non valido (ammessi 'sport', 'music', 'theatre','miscellaneous')");
+        if (!(segment.equals("sport") || segment.equals("music") || segment.equals("theatre")
+                || segment.equals("miscellaneous")))
+            throw new FilterException("Tipo inserito non valido (ammessi 'sport', 'music', 'theatre','miscellaneous')");
     }
+
 }
-
-
-
