@@ -9,30 +9,16 @@ package it.univpm.progetto.model;
  */
 public class MusicEvent extends Event {
 
-	private String musicGenre;
-	private String musicSubGenre;
+    private String musicGenre;
+    private String musicSubGenre;
 
-	public MusicEvent(String id, String name, String info, boolean family, String musicGenre, String musicSubGenre) {
-		super(id, name, info, family);
-		this.musicGenre = musicGenre;
-		this.musicSubGenre = musicSubGenre;
-	}
-	
-	/**
-	 * <p>
-	 * Ritorna il genere dell'evento di musica
-	 * @return musicGenre
-	 * <p>
-	 */
-	public String getMusicGenre() {
-		return musicGenre;
-	}
-	/**
-	 * 
-	 * @param musicGenre indica il genere dell'evento di musica
-	 * 
-	 */
-	public void setMusicGenre(String musicGenre) {
+    public MusicEvent(String id, String name, String info, boolean family, String musicGenre, String musicSubGenre) {
+        super(id, name, info, family);
+        this.musicGenre = musicGenre;
+        this.musicSubGenre = musicSubGenre;
+    }
+
+    public void setMusicGenre(String musicGenre) {
 		this.musicGenre = musicGenre;
 	}
 	/**
@@ -53,4 +39,16 @@ public class MusicEvent extends Event {
 		this.musicSubGenre = musicSubGenre;
 	}
 	
+	/**
+	 * <p>
+	 * Ritorna il genere dell'evento di musica
+	 * @return musicGenre
+	 * <p>
+	 */
+    @Override
+    public String getGenre() {
+        return musicGenre;
+
+    }
+
 }

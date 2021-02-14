@@ -9,24 +9,26 @@ package it.univpm.progetto.model;
  */
 public class ArtsAndTheatreEvent extends Event {
 
-	private String artsAndTheatreGenre;
-	private String artsAndTheatreSubGenre;
+    private String artsAndTheatreGenre;
+    private String artsAndTheatreSubGenre;
 
-	public ArtsAndTheatreEvent(String id, String name, String info, boolean family, String artsAndTheatreGenre, String artsAndTheatreSubGenre) {
-		super(id, name, info, family);
-		this.artsAndTheatreGenre = artsAndTheatreGenre;
-		this.artsAndTheatreSubGenre = artsAndTheatreSubGenre;
-	}
+    public ArtsAndTheatreEvent(String id, String name, String info, boolean family, String artsAndTheatreGenre,
+            String artsAndTheatreSubGenre) {
+        super(id, name, info, family);
+        this.artsAndTheatreGenre = artsAndTheatreGenre;
+        this.artsAndTheatreSubGenre = artsAndTheatreSubGenre;
+    }
 
-	/**
+    /**
 	 * <p>
 	 * Ritorna il genere dell'evento arte e teatro
 	 * @return artsAndTheatreGenre
 	 * <p>
 	 */
-	public String getArtsAndTheatreGenre() {
-		return artsAndTheatreGenre;
-	}
+    @Override
+    public String getGenre() {
+        return artsAndTheatreGenre;
+    }
 	/**
 	 * 
 	 * @param artsAndTheatreGenre indica il genere dell'evento arte e teatro
