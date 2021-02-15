@@ -3,7 +3,7 @@ package it.univpm.progetto.exception;
 /**
  * 
  */
-public class CustomException extends Exception {
+public class GenericException extends Exception {
 
 	/**
 	 * 
@@ -18,7 +18,7 @@ public class CustomException extends Exception {
 	/**
 	 * 
 	 */
-	public CustomException(String message) {
+	public GenericException(String message) {
 		this.message = message;
 	}
 	

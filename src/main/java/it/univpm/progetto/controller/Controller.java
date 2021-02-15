@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import it.univpm.progetto.exception.CustomException;
+import it.univpm.progetto.exception.GenericException;
 import it.univpm.progetto.model.Event;
 import it.univpm.progetto.service.Service;
 
@@ -26,7 +26,7 @@ public class Controller {
 	 */
 	
 	@PostMapping("/readData")
-	public void readData() throws CustomException {
+	public void readData() throws GenericException {
 		service.readData();
 	}
 
@@ -36,7 +36,7 @@ public class Controller {
 	 * <p>
 	 */
 	@GetMapping("/getMetaData")
-	public JsonNode getMetaData() throws CustomException {
+	public JsonNode getMetaData() throws GenericException {
 		return service.getMetaData();
 	}
 
@@ -46,7 +46,7 @@ public class Controller {
 	 * <p>
 	 */
 	@GetMapping("/getData")
-	public List<Event> getData() throws CustomException {
+	public List<Event> getData() throws GenericException {
 		return service.getData();
 	}
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import it.univpm.progetto.exception.CustomException;
+import it.univpm.progetto.exception.GenericException;
 import it.univpm.progetto.model.Event;
 
 @org.springframework.stereotype.Service
@@ -13,22 +13,22 @@ public interface Service {
 	/**
 	 * Metodo di recupero dei dati da Ticket Master
 	 *
-	 * @throws CustomException 
+	 * @throws GenericException 
 	 */
-	public void readData() throws CustomException;
+	public void readData() throws GenericException;
 
 	/**
 	 * Metodo di recupero dei metadati utilizzati nel modello dati del progetto
 	 *
-	 * @throws CustomException 
+	 * @throws GenericException 
 	 */
-	public JsonNode getMetaData() throws CustomException;
+	public JsonNode getMetaData() throws GenericException;
 
 	/**
 	 * Metodo di recupero di tutti i dati recuperati da Ticket Master
 	 *
-	 * @throws CustomException 
+	 * @throws GenericException 
 	 */
-	public List<Event> getData() throws CustomException;
+	public List<Event> getData() throws GenericException;
 
 }

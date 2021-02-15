@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import it.univpm.progetto.exception.CustomException;
+import it.univpm.progetto.exception.GenericException;
 import it.univpm.progetto.model.*;
 
 /**
@@ -105,7 +105,7 @@ public class ServiceImpl implements Service {
 	 * @throws Exception 
     */
 	@Override
-	public void readData() throws CustomException {
+	public void readData() throws GenericException {
 		
 		// Eseguo ciclo in funzione del numero di pagine
     	for (int index = 0; index < PAGES; index ++) {
@@ -134,7 +134,7 @@ public class ServiceImpl implements Service {
      * <p>
      */
 	@Override
-	public JsonNode getMetaData() throws CustomException {
+	public JsonNode getMetaData() throws GenericException {
 
 		return processClass(Event.class);
 
@@ -207,7 +207,7 @@ public class ServiceImpl implements Service {
      * <p>
      */
 	@Override
-	public List<Event> getData() throws CustomException {
+	public List<Event> getData() throws GenericException {
 		return events;
 	}
 
@@ -234,7 +234,7 @@ public class ServiceImpl implements Service {
 	 * Funzione di elaborazione dei dati della pagina inserendo i record recuperati nel modello dati
 	 * <p>
 	 */
-	private void processPage(String ticketMasterData) throws CustomException {
+	private void processPage(String ticketMasterData) throws GenericException {
 		
 		try {
 			// Elaboro il nodo radice
@@ -403,7 +403,7 @@ public class ServiceImpl implements Service {
 			}
 		} catch (IOException ex) {
 			LOG.error(ex.getMessage());
-			throw new CustomException("Errore nel caricamento della pagina!");
+			throw new GenericException("Errore nel caricamento della pagina!");
 		}
 
 	}
@@ -413,7 +413,7 @@ public class ServiceImpl implements Service {
 	 * Funzione di elaborazione delle fasce di prezzo di un evento
 	 * <p>
 	 */	
-	private void processPriceRanges(Event event, JsonNode priceRangesNode) throws CustomException {
+	private void processPriceRanges(Event event, JsonNode priceRangesNode) throws GenericException {
 		
 		// Leggo il primo valore dell'array del nodo PriceRange
 		if (priceRangesNode.isArray()) {
@@ -432,7 +432,7 @@ public class ServiceImpl implements Service {
 	 * Funzione di elaborazione delle località di un evento
 	 * <p>
 	 */
-	private void processVenues(Event event, JsonNode venuesNode) throws CustomException {
+	private void processVenues(Event event, JsonNode venuesNode) throws GenericException {
 		
 		// Leggo il primo valore dell'array del nodo venue
 		if (venuesNode.isArray()) {
