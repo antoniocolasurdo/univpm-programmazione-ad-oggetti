@@ -2,7 +2,6 @@ package it.univpm.progetto.filter;
 
 import java.util.Iterator;
 import java.util.Vector;
-import it.univpm.progetto.exception.FilterException;
 import it.univpm.progetto.exception.WrongNegativePriceMinException;
 import it.univpm.progetto.exception.WrongPriceMaxException;
 import it.univpm.progetto.model.Event;

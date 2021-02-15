@@ -1,11 +1,9 @@
 package it.univpm.progetto.filter;
 
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.Vector;
-import java.time.*;
 
 import it.univpm.progetto.model.Event;
 import it.univpm.progetto.exception.*;

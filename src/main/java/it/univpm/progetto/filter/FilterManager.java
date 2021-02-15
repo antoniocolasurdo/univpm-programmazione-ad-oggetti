@@ -2,6 +2,14 @@ package it.univpm.progetto.filter;
 
 import java.util.Vector;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import it.univpm.progetto.exception.WrongEndDateException;
+import it.univpm.progetto.exception.WrongFormatDateException;
+import it.univpm.progetto.exception.WrongGenreException;
+import it.univpm.progetto.exception.WrongNegativePriceMinException;
+import it.univpm.progetto.exception.WrongPriceMaxException;
+import it.univpm.progetto.exception.WrongSegmentException;
+import it.univpm.progetto.exception.WrongStartDateException;
+import it.univpm.progetto.exception.WrongStateException;
 import it.univpm.progetto.model.Event;
 
 public class FilterManager {
@@ -35,7 +43,7 @@ public class FilterManager {
             filtro.filter(eventi);
     }
 
-    public void validate() {
+    public void validate() throws WrongFormatDateException, WrongEndDateException, WrongStartDateException, WrongGenreException, WrongSegmentException, WrongStateException, WrongNegativePriceMinException, WrongPriceMaxException {
         for (Filter filtro : filtri)
             filtro.validate();
     }
