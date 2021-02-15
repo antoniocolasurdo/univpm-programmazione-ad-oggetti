@@ -11,7 +11,7 @@ package it.univpm.progetto.exception;
 
 public class WrongSegmentException extends Exception {
 
-	private static final long serialVersionUID =
+	private static final long serialVersionUID = 471795985727177677L;
 	
     /**
      * Costruttore della classe <b>WrongSegmentException</b>

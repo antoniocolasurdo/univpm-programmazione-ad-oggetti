@@ -1,9 +1,11 @@
 package it.univpm.progetto.filter;
 
 import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.Vector;
+import java.time.*;
 
 import it.univpm.progetto.model.Event;
 import it.univpm.progetto.exception.*;
@@ -25,7 +27,7 @@ public class DateFilter extends Filter {
      */
     private String StartDate;
     private String EndDate;
-
+    LocalDate lt = LocalDate.now();
     /**
      * Oggetto formattatore di date
      */
@@ -82,7 +84,7 @@ public class DateFilter extends Filter {
     }
 
     @Override
-    public void validate() throws WrongEndDateException, WrongFormatDateException {
+    public void validate() throws WrongEndDateException, WrongFormatDateException, WrongStartDateException {
         LocalDate from = null, to = null;
         try {
             if (StartDate != null)
@@ -95,6 +97,8 @@ public class DateFilter extends Filter {
         }
         if (from != null && to != null && to.compareTo(from) < 0)
             throw new WrongEndDateException("La data finale non può essere precedente a quella iniziale");
+		if (from.compareTo(lt)<0)
+        	throw new WrongStartDateException("La data iniziale non può essere precedente alla data corrente");
     }
 
 }

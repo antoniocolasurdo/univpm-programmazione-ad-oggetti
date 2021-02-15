@@ -25,10 +25,11 @@ public abstract class Filter {
      * @throws WrongGenreException 
      * @throws WrongFormatDateException
      * @throws WrongEndDateException
+     * @throws WrongStartDateException
      * @throws WrongSegmentException
      * @throws WrongStateException
      * @throws WrongNegativePriceMinException
      * @throws WrongPriceMaxException
      */
-    public abstract void validate() throws WrongFormatDateException, WrongEndDateException, WrongGenreException, WrongSegmentException, WrongStateException, WrongNegativePriceMinException, WrongPriceMaxException;
+    public abstract void validate() throws WrongFormatDateException, WrongEndDateException, WrongStartDateException, WrongGenreException, WrongSegmentException, WrongStateException, WrongNegativePriceMinException, WrongPriceMaxException;
 }

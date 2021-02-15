@@ -11,7 +11,7 @@ package it.univpm.progetto.exception;
 
 public class WrongStateException extends Exception {
 
-	private static final long serialVersionUID =
+	private static final long serialVersionUID = 371795985727177677L;
 	
     /**
      * Costruttore della classe <b>WrongStateException</b>

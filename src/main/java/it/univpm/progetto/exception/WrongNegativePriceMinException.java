@@ -11,7 +11,7 @@ package it.univpm.progetto.exception;
 public class WrongNegativePriceMinException extends Exception {
 
 
-	private static final long serialVersionUID = ;
+	private static final long serialVersionUID = 4719919380727151647L;
 
 	/**
 	 * Costruttore della classe <b>WrongNegativePriceMinException</b>
