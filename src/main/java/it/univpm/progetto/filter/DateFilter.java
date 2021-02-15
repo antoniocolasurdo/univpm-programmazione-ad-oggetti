@@ -4,8 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.Vector;
-import it.univpm.progetto.exception.FilterException;
+
 import it.univpm.progetto.model.Event;
+import it.univpm.progetto.exception.*;
 
 /**
  * @author Antonio Colasurdo e Daniele Sergiacomi
@@ -81,7 +82,7 @@ public class DateFilter extends Filter {
     }
 
     @Override
-    public void validate() {
+    public void validate() throws WrongEndDateException, WrongFormatDateException {
         LocalDate from = null, to = null;
         try {
             if (StartDate != null)
@@ -90,10 +91,10 @@ public class DateFilter extends Filter {
                 to = LocalDate.parse(EndDate, dtf);
         }
         catch (Exception e) {
-            throw new FilterException("Date inserite non valide (formato accettato 'dd-MM-yyyy')");
+            throw new WrongFormatDateException("Date inserite non valide (formato accettato 'dd-MM-yyyy')");
         }
         if (from != null && to != null && to.compareTo(from) < 0)
-            throw new FilterException("La data finale non può essere precedente a quella iniziale");
+            throw new WrongEndDateException("La data finale non può essere precedente a quella iniziale");
     }
 
 }

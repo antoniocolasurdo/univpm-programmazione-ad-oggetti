@@ -3,6 +3,7 @@ package it.univpm.progetto.filter;
 import java.util.Iterator;
 import java.util.Vector;
 import it.univpm.progetto.exception.FilterException;
+import it.univpm.progetto.exception.WrongSegmentException;
 import it.univpm.progetto.model.ArtsAndTheatreEvent;
 import it.univpm.progetto.model.Event;
 import it.univpm.progetto.model.MiscellaneousEvent;
@@ -77,10 +78,10 @@ public class SegmentFilter extends Filter {
     }
 
     @Override
-    public void validate() {
+    public void validate() throws WrongSegmentException {
         if (!(segment.equals("sport") || segment.equals("music") || segment.equals("theatre")
                 || segment.equals("miscellaneous")))
-            throw new FilterException("Tipo inserito non valido (ammessi 'sport', 'music', 'theatre','miscellaneous')");
+            throw new WrongSegmentException("Tipo inserito non valido (ammessi 'sport', 'music', 'theatre','miscellaneous')");
     }
 
 }

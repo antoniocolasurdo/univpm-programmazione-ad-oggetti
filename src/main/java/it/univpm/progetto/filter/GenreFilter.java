@@ -2,9 +2,9 @@ package it.univpm.progetto.filter;
 
 import java.util.Iterator;
 import java.util.Vector;
-import it.univpm.progetto.exception.FilterException;
-import it.univpm.progetto.model.Event;
 
+import it.univpm.progetto.model.Event;
+import it.univpm.progetto.exception.*;
 /**
  * @author Antonio Colasurdo e Daniele Sergiacomi
  * 
@@ -31,9 +31,9 @@ public class GenreFilter extends Filter {
     }
 
     @Override
-    public void validate() {
+    public void validate() throws WrongGenreException {
         if (genre == null)
-            throw new FilterException("Genere non valido!");
+            throw new WrongGenreException("Genere non valido!");
     }
 
 }

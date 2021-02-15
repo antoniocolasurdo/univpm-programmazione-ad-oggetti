@@ -3,6 +3,7 @@ package it.univpm.progetto.filter;
 import java.util.Iterator;
 import java.util.Vector;
 import it.univpm.progetto.exception.FilterException;
+import it.univpm.progetto.exception.WrongStateException;
 import it.univpm.progetto.model.Event;
 
 /**
@@ -33,9 +34,9 @@ public class StateFilter extends Filter {
     }
 
     @Override
-    public void validate() {
+    public void validate() throws WrongStateException {
         if (stateCode == null && stateCode.length() != 2)
-            throw new FilterException("Codice dello stato non valido!");
+            throw new WrongStateException("Codice dello stato non valido!");
 
     }
 

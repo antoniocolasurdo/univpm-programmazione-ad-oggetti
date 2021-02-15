@@ -3,6 +3,8 @@ package it.univpm.progetto.filter;
 import java.util.Iterator;
 import java.util.Vector;
 import it.univpm.progetto.exception.FilterException;
+import it.univpm.progetto.exception.WrongNegativePriceMinException;
+import it.univpm.progetto.exception.WrongPriceMaxException;
 import it.univpm.progetto.model.Event;
 
  /**
@@ -55,11 +57,11 @@ public class PriceRangeFilter extends Filter {
         }
     }
 
-    public void validate() {
+    public void validate() throws WrongNegativePriceMinException, WrongPriceMaxException {
         if (priceMin != null && priceMin < 0)
-            throw new FilterException("Il prezzo minimo non può essere negativo");
+            throw new WrongNegativePriceMinException("Il prezzo minimo non può essere negativo");
         if (priceMin != null && priceMax != null && priceMax < priceMin)
-            throw new FilterException("Il prezzo massimo non può essere minore di quello minimo");
+            throw new WrongPriceMaxException("Il prezzo massimo non può essere minore di quello minimo");
     }
 
 }

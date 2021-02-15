@@ -2,6 +2,7 @@ package it.univpm.progetto.filter;
 
 import java.util.Vector;
 import it.univpm.progetto.model.Event;
+import it.univpm.progetto.exception.*;
 
 /**
  * @author Antonio Colasurdo e Daniele Sergiacomi
@@ -21,6 +22,13 @@ public abstract class Filter {
 
     /**
      * Verifica che i parametri passati in ingresso al filtro siano validi o meno
+     * @throws WrongGenreException 
+     * @throws WrongFormatDateException
+     * @throws WrongEndDateException
+     * @throws WrongSegmentException
+     * @throws WrongStateException
+     * @throws WrongNegativePriceMinException
+     * @throws WrongPriceMaxException
      */
-    public abstract void validate();
+    public abstract void validate() throws WrongFormatDateException, WrongEndDateException, WrongGenreException, WrongSegmentException, WrongStateException, WrongNegativePriceMinException, WrongPriceMaxException;
 }

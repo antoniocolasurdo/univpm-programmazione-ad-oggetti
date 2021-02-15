@@ -1,17 +1,18 @@
 package it.univpm.progetto.stats;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Vector;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import it.univpm.progetto.model.Event;
 
 public interface Stats {
-	
+
     /**
-     * Restituisce il numero di eventi presenti
+     * Restituisce il numero di eventi presenti in ogni stato
      * 
      * @return
      */
-    public int getNumEvents(Vector<Event> eventi);
+    public HashMap<String, Integer> getNumEvents(Vector<Event> eventi);
 
     /**
      * Restituisce il numero di eventi presenti raggruppati per segmento e genere
@@ -19,6 +20,14 @@ public interface Stats {
      * @param eventi
      * @return
      */
-    public ObjectNode getNumEventsGenre(Vector<Event> eventi);
+    public HashMap<String, int[]> getNumEventsGenre(Vector<Event> eventi);
+
+    /**
+     * Restituisce l'insieme degli statescodes in cui si terranno gli eventi
+     * 
+     * @param eventi
+     * @return
+     */
+    public HashSet<String> getStates(Vector<Event> eventi);
 
 }

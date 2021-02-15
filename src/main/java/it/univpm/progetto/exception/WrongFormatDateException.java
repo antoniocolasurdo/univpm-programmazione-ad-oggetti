@@ -20,6 +20,15 @@ public class WrongFormatDateException extends Exception {
 		super();
 	}
 	
+    /**
+     * Costruttore
+     * 
+     * @param message
+     */
+    public WrongFormatDateException(String message) {
+        super(message);
+    }
+	
 	/**
 	 * Questo metodo ritorna una stringa che descrive l'errore
 	 * 

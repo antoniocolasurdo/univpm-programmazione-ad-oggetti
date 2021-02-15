@@ -20,6 +20,15 @@ public class WrongEndDateException extends Exception {
 		super();
 	}
 	
+    /**
+     * Costruttore
+     * 
+     * @param message
+     */
+    public WrongEndDateException(String message) {
+        super(message);
+    }
+	
 	/**
 	 * Questo metodo ritorna una stringa che descrive l'errore
 	 * 
