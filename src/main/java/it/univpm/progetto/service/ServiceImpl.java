@@ -296,16 +296,20 @@ public class ServiceImpl implements Service {
 									// Leggo il genere ed il sottogenere
 									String genre = null;
 									String subGenre = null;
-
+									
+									// Recupero il genere
 									if (classificationNode.has("genre")) {
 										JsonNode genreNode = classificationNode.get("genre");
 										genre = genreNode.get("name").asText();
 									}
+									
+									// Recupero il sottogenere
 									if (classificationNode.has("subGenre")) {
 										JsonNode subGenreNode = classificationNode.get("subGenre");
 										subGenre = subGenreNode.get("name").asText();
 									}
-
+									
+									// Recupero la classe di classificazione dell'evento
 									if (classificationNode.has("segment")) {
 										JsonNode segmentNode = classificationNode.get("segment");
 										String segmentName = segmentNode.get("name").asText();
@@ -391,6 +395,8 @@ public class ServiceImpl implements Service {
 	}
 
 	private void processPriceRanges(Event event, JsonNode priceRangesNode) throws CustomException {
+		
+		// Leggo il primo valore dell'array del nodo PriceRange
 		if (priceRangesNode.isArray()) {
 			JsonNode priceRangeNode = priceRangesNode.get(0);
 			PriceRange priceRange = new PriceRange();
@@ -403,6 +409,8 @@ public class ServiceImpl implements Service {
 	}
 
 	private void processVenues(Event event, JsonNode venuesNode) throws CustomException {
+		
+		// Leggo il primo valore dell'array del nodo venue
 		if (venuesNode.isArray()) {
 			JsonNode venueNode = venuesNode.get(0);
 			Venue venue = new Venue();

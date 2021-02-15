@@ -31,7 +31,7 @@ public abstract class Event {
      * @param name   indica il nome dell'evento
      * @param info   indica l'info dell'evento
      * @param family indica se l'evento è per famiglie oppure no
-     *               <p>
+     * <p>
      */
     public Event(String id, String name, String info, boolean family) {
         this.id = id;
@@ -47,7 +47,7 @@ public abstract class Event {
      * Ritorna l'id dell'evento
      * 
      * @return id
-     *         <p>
+     * <p>
      */
     public String getId() {
         return id;
@@ -67,7 +67,7 @@ public abstract class Event {
      * Ritorna il nome dell'evento
      * 
      * @return name
-     *         <p>
+     * <p>
      */
     public String getName() {
         return name;
@@ -87,7 +87,7 @@ public abstract class Event {
      * Ritorna la data dell'evento
      * 
      * @return dates
-     *         <p>
+     * <p>
      */
     public Dates getDates() {
         return dates;
@@ -107,7 +107,7 @@ public abstract class Event {
      * Ritorna le info dell'evento
      * 
      * @return info
-     *         <p>
+     * <p>
      */
     public String getInfo() {
         return info;
@@ -121,11 +121,21 @@ public abstract class Event {
     public void setInfo(String info) {
         this.info = info;
     }
-
+    /**
+     * <p>
+     * Ritorna se è un evento per famiglie
+     * 
+     * @return family
+     * <p>
+     */
     public boolean isFamily() {
         return family;
     }
-
+    /**
+     * 
+     * @param family indica se è per famiglie
+     * 
+     */
     public void setFamily(boolean family) {
         this.family = family;
     }
