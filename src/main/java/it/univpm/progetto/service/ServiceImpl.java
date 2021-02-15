@@ -23,8 +23,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import it.univpm.progetto.exception.CustomException;
 import it.univpm.progetto.model.*;
-/*
+
+/**
+ * @author Antonio Colasurdo e Daniele Sergiacomi
  * 
+ * <p>
+ * <b>Classe</b> che implementa tutte le funzioni relative alla lettura dei dati da TicketMaster e li recupera mettendo a disposizione i dati e metadati
+ * <p>
  */
 @org.springframework.stereotype.Service
 public class ServiceImpl implements Service {
@@ -95,8 +100,8 @@ public class ServiceImpl implements Service {
 	
 	/**
      * <p>
-    * funzione di lettura dati per leggere i dati di TicketMaster di un numero <i>PAGES</i> di pagine
-    * <p>
+     * Funzione di lettura dati per leggere i dati di TicketMaster di un numero <i>PAGES</i> di pagine
+     * <p>
 	 * @throws Exception 
     */
 	@Override
@@ -125,9 +130,9 @@ public class ServiceImpl implements Service {
 
 	/**
      * <p>
-    * Metodo di recupero della struttura dei metadati in un oggetto Json
-    * <p>
-    */
+     * Metodo di recupero della struttura dei metadati in un oggetto Json
+     * <p>
+     */
 	@Override
 	public JsonNode getMetaData() throws CustomException {
 
@@ -135,6 +140,11 @@ public class ServiceImpl implements Service {
 
 	}
 
+	/**
+     * <p>
+     * Funzione di elaborazione di una classe generica per il recupero dei metadati
+     * <p>
+     */
 	private ObjectNode processClass(Class<?> classe) {
 
 		// Creo il nodo all'interno del quale inserisco i campi della classe
@@ -159,8 +169,12 @@ public class ServiceImpl implements Service {
 				    arrayNode.add(listObjectNode);
 				}
 			} else {
+				
 				// Verifica se la proprietà è un oggetto appartenente alle classi del model
-				if (field.getType().getSimpleName().equals("Dates")) {
+				if (field.getType().getSimpleName().equals("Dates") ||
+					field.getType().getSimpleName().equals("Venue") ||
+					field.getType().getSimpleName().equals("PriceRange")) {
+					
 					// Creo un sottonodo con le proprietà contenute nella corrispondente classe
 					ObjectNode subNode = objectMapper.createObjectNode();
 					subNode.set(field.getType().getSimpleName(), processClass(field.getType()));
@@ -394,6 +408,11 @@ public class ServiceImpl implements Service {
 
 	}
 
+	/**
+	 * <p>
+	 * Funzione di elaborazione delle fasce di prezzo di un evento
+	 * <p>
+	 */	
 	private void processPriceRanges(Event event, JsonNode priceRangesNode) throws CustomException {
 		
 		// Leggo il primo valore dell'array del nodo PriceRange
@@ -408,6 +427,11 @@ public class ServiceImpl implements Service {
 		}								
 	}
 
+	/**
+	 * <p>
+	 * Funzione di elaborazione delle località di un evento
+	 * <p>
+	 */
 	private void processVenues(Event event, JsonNode venuesNode) throws CustomException {
 		
 		// Leggo il primo valore dell'array del nodo venue
