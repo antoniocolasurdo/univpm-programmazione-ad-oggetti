@@ -2,6 +2,7 @@ package it.univpm.progetto.filter;
 
 import java.util.Iterator;
 import java.util.Vector;
+
 import it.univpm.progetto.exception.WrongStateException;
 import it.univpm.progetto.model.Event;
 
@@ -15,28 +16,41 @@ import it.univpm.progetto.model.Event;
 
 public class StateFilter extends Filter {
 
-    private String stateCode;
+    private String[] filteredStateCodes;
 
     public StateFilter(String stateCode) {
-        this.stateCode = stateCode;
+        super();
+        this.filteredStateCodes = stateCode.toUpperCase().split(",");
     }
 
     @Override
     public void filter(Vector<Event> eventi) {
-
         Iterator<Event> iter = eventi.iterator();
+
         while (iter.hasNext()) {
-            Event evento = iter.next(); // Prossimo evento
-            if (!evento.getVenue().getStateCode().equals(stateCode))
-                iter.remove();
+        	Event user = iter.next();
+        	
+        	boolean found = false;
+        	if (user.getVenue() != null && user.getVenue().getStateCode() != null) {
+            	for (int index = 0; index < filteredStateCodes.length; index++) {
+                    if (user.getVenue().getStateCode().equalsIgnoreCase(filteredStateCodes[index])) {
+                    	found = true;
+                    }
+            	}
+        	}
+        	
+            if (!found) {
+            	iter.remove();
+            }
         }
     }
 
     @Override
     public void validate() throws WrongStateException {
-        if (stateCode == null && stateCode.length() != 2)
-            throw new WrongStateException("Codice dello stato non valido!");
-
+    	for (int index = 0; index < filteredStateCodes.length; index++) {
+            if (filteredStateCodes[index].length() < 2 || filteredStateCodes[index].length() > 3)
+                throw new WrongStateException("Codice dello stato non valido, ammessi solo valori alfanumerici di 2 o 3 caratteri!");
+    	}
     }
 
 }

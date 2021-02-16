@@ -25,7 +25,7 @@ public class SegmentFilter extends Filter {
      * TODO
      * SEGMENTI INSERIBILI DALL'UTENTE (da mettere nel README): {sport, music, theatre, generic}
      */
-    private String segment;
+	private String[] filteredSegments;
 
     /**
      * Costruttore
@@ -34,53 +34,64 @@ public class SegmentFilter extends Filter {
      */
     public SegmentFilter(String segment) {
         super();
-        this.segment = segment;
+        this.filteredSegments = segment.toLowerCase().split(",");
     }
 
     @Override
-    public void filter(Vector<Event> event) {
-        Iterator<Event> iter = event.iterator();
-        switch (segment) {
-        case "music":
-            while (iter.hasNext()) {
-                Event user = iter.next(); // Prossimo evento
-                if (!(user instanceof MusicEvent))
-                    iter.remove();
-            }
-            break;
+    public void filter(Vector<Event> eventi) {
+        Iterator<Event> iter = eventi.iterator();
 
-        case "sport":
-            while (iter.hasNext()) {
-                Event user = iter.next(); // Prossimo evento
-                if (!(user instanceof SportEvent))
-                    iter.remove();
-            }
-            break;
+        while (iter.hasNext()) {
+        	Event user = iter.next();
 
-        case "theatre":
-            while (iter.hasNext()) {
-                Event user = iter.next(); // Prossimo evento
-                if (!(user instanceof ArtsAndTheatreEvent))
-                    iter.remove();
-            }
-            break;
+        	boolean found = false;
 
-        case "miscellaneous":
-            while (iter.hasNext()) {
-                Event user = iter.next(); // Prossimo evento
-                if (!(user instanceof MiscellaneousEvent))
-                    iter.remove();
+        	for (int index = 0; index < filteredSegments.length; index++) {
+
+        		switch (filteredSegments[index]) {
+
+        		case "music":
+                    if (user instanceof MusicEvent) {
+                        found = true;
+                    }
+                    break;
+
+
+        		case "sport":
+                    if (user instanceof SportEvent) {
+                        found = true;
+                    }
+                    break;
+
+
+        		case "theatre":
+                    if (user instanceof ArtsAndTheatreEvent) {
+                    	found = true;
+                    }
+                    break;
+
+
+        		case "miscellaneous":
+                    if (user instanceof MiscellaneousEvent) {
+                        found = true;
+                    }
+                    break;
+                }
             }
-            break;
+
+        	if (!found) {
+            	iter.remove();
+            }
         }
-
     }
 
     @Override
     public void validate() throws WrongSegmentException {
-        if (!(segment.equals("sport") || segment.equals("music") || segment.equals("theatre")
-                || segment.equals("miscellaneous")))
-            throw new WrongSegmentException("Tipo inserito non valido (ammessi 'sport', 'music', 'theatre','miscellaneous')");
+    	for (int index = 0; index < filteredSegments.length; index++) {
+            if (!(filteredSegments[index].equals("sport") || filteredSegments[index].equals("music") ||
+            		filteredSegments[index].equals("theatre") || filteredSegments[index].equals("miscellaneous")))
+                throw new WrongSegmentException("Tipo inserito non valido (ammessi 'sport', 'music', 'theatre','miscellaneous')");
+    	}
     }
 
 }

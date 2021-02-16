@@ -14,26 +14,43 @@ import it.univpm.progetto.exception.*;
  */
 
 public class GenreFilter extends Filter {
-    private String genre;
+
+	private String[] filteredGenres;
 
     public GenreFilter(String genre) {
-        this.genre = genre;
+    	super();
+        this.filteredGenres = genre.toLowerCase().split(",");
     }
 
     @Override
     public void filter(Vector<Event> eventi) {
         Iterator<Event> iter = eventi.iterator();
+
         while (iter.hasNext()) {
-            Event evento = iter.next(); // Prossimo evento
-            if (!evento.getGenre().equals(genre))
-                iter.remove();
+        	Event evento = iter.next();
+        	
+        	boolean found = false;
+        	if (evento.getGenre() != null) {
+            	for (int index = 0; index < filteredGenres.length; index++) {
+                    if (evento.getGenre().equalsIgnoreCase(filteredGenres[index])) {
+                    	found = true;
+                    }
+            	}
+        	}
+        	
+            if (!found) {
+            	iter.remove();
+            }
         }
     }
 
     @Override
     public void validate() throws WrongGenreException {
-        if (genre == null)
-            throw new WrongGenreException("Genere non valido!");
+    	for (int index = 0; index < filteredGenres.length; index++) {
+            if (filteredGenres[index].isEmpty()) {
+                throw new WrongGenreException("Genere non valido!");
+            }
+        }
     }
 
 }

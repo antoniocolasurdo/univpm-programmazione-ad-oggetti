@@ -23,9 +23,10 @@ public class DateFilter extends Filter {
     /**
      * Valori di intervallo di data
      */
-    private String StartDate;
-    private String EndDate;
-    LocalDate lt = LocalDate.now();
+    private String startDate;
+    private String endDate;
+    private final LocalDate lt = LocalDate.now();
+
     /**
      * Oggetto formattatore di date
      */
@@ -37,10 +38,10 @@ public class DateFilter extends Filter {
      * @param StartDate
      * @param EndDate
      */
-    public DateFilter(String StartDate, String EndDate) {
+    public DateFilter(String startDate, String endDate) {
         super();
-        this.StartDate = StartDate;
-        this.EndDate = EndDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
         dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     }
 
@@ -50,16 +51,16 @@ public class DateFilter extends Filter {
         // Crea le date a partire dalle stringhe
         LocalDate from = null, to = null;
 
-        if (StartDate != null)
-            from = LocalDate.parse(StartDate, dtf);
-        if (EndDate != null)
-            to = LocalDate.parse(EndDate, dtf);
+        if (startDate != null)
+            from = LocalDate.parse(startDate, dtf);
+        if (endDate != null)
+            to = LocalDate.parse(endDate, dtf);
 
         // Ordina gli eventi in ordine cronologico
         eventi.sort((e1, e2) -> e1.getDates().getLocalDate().compareTo(e2.getDates().getLocalDate()));
         // Istanzia un nuovo iteratore
 
-        if (StartDate != null) {
+        if (startDate != null) {
             Iterator<Event> iter = eventi.iterator();
             while (iter.hasNext()) {
                 Event event = iter.next(); // Prossima misurazione
@@ -69,7 +70,7 @@ public class DateFilter extends Filter {
                     break;
             }
         }
-        if (EndDate != null) {
+        if (endDate != null) {
             Iterator<Event> iter = eventi.iterator();
             while (iter.hasNext()) {
                 Event event = iter.next(); // Prossima misurazione
@@ -85,10 +86,10 @@ public class DateFilter extends Filter {
     public void validate() throws WrongEndDateException, WrongFormatDateException, WrongStartDateException {
         LocalDate from = null, to = null;
         try {
-            if (StartDate != null)
-                from = LocalDate.parse(StartDate, dtf);
-            if (EndDate != null)
-                to = LocalDate.parse(EndDate, dtf);
+            if (startDate != null)
+                from = LocalDate.parse(startDate, dtf);
+            if (endDate != null)
+                to = LocalDate.parse(endDate, dtf);
         }
         catch (Exception e) {
             throw new WrongFormatDateException("Date inserite non valide (formato accettato 'dd-MM-yyyy')");

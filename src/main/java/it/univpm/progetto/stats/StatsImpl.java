@@ -19,6 +19,7 @@ public class StatsImpl implements Stats {
 
     @Override
     public HashMap<String, Integer> getNumEvents(Vector<Event> eventi) {
+		
         /*
          * La HashMap è del tipo: {"stato1" : 10, "stato2" : 12, ecc..}
          */

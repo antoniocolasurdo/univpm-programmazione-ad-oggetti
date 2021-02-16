@@ -1,6 +1,6 @@
 # Progetto_Programmazione_ad_Oggetti_di_Sergiacomi_Colasurdo
 
-##Indice
+# Indice
 
 - [Introduzione](#introduzione)
 
@@ -28,16 +28,16 @@
 Il programma permette di vedere tutti gli eventi degli USA recuperando i dati tramite una chiamata API da TicketMaster; l'utente può visualizzare l'id dell'evento, il nome dell'evento, la data, l'ora, il range di prezzo del biglietto, lo stato e la città dove si svolgerà l'evento, la categoria (che può essere: sportiva, musicale, artistica/teatrale o eventi sul ghiaccio) e il genere (football,rock,pop, hockey, teatro,...), e una descrizione generale di cosa tratta l'evento. I dati possono essere filtrati per uno o più stati, un certo intervallo di data, una categoria o uno o più generi appartenenti ad una determinata categoria. Sarà inoltre possibile vedere delle statistiche quali:
 Il massimo, minimo, media di eventi mensili, il numero totale di eventi e il numero totale di eventi filtrato per genere.
 
-#Diagrammi UML
+# Diagrammi UML
 <b>Diagramma dei Casi d'Uso</b>
 ![Utente] (https://raw.githubusercontent.com/antoniocolasurdo/univpm-programmazione-ad-oggetti/main/Img/Diagramma%20dei%20Casi%20D'Uso.png)
 
 
-#Rotte
+# Rotte
 Le richieste che l'utente può effettuare tramite Postman devono essere effettuate all'indirizzo localhost:8080.
 
 
-#Rotte relative alla lettura dati
+# Rotte relative alla lettura dati
 
 | Tipo | Rotta          | Descrizione                                                  |
 | :--: | -------------- | ------------------------------------------------------------ |
@@ -47,19 +47,19 @@ Le richieste che l'utente può effettuare tramite Postman devono essere effettua
 
 
 
-#Rotte relative ai Filter
+# Rotte relative ai Filter
 
 
-#Rotte relative alle Stats
+# Rotte relative alle Stats
 
 
-#Gestione Eccezioni
+# Gestione Eccezioni
 
 
-#Test
+# Test
 
 
-#Tecnologie utilizzate
+# Tecnologie utilizzate
 
 
 - Software utilizzati:
@@ -84,7 +84,7 @@ Le richieste che l'utente può effettuare tramite Postman devono essere effettua
 
 
 
-#Autori
+# Autori
 Il progetto è stato sviluppato da:
 
 @ Antonio Colasurdo & @ Daniele Sergiacomi.

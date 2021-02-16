@@ -1,7 +1,9 @@
 package it.univpm.progetto.filter;
 
 import java.util.Vector;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import it.univpm.progetto.exception.WrongEndDateException;
 import it.univpm.progetto.exception.WrongFormatDateException;
 import it.univpm.progetto.exception.WrongGenreException;
@@ -22,29 +24,41 @@ public class FilterManager {
             @JsonProperty("endDate") String to) {
 
         filtri = new Vector<Filter>();
-        if (segment != null)
+        if (segment != null) {
             filtri.add(new SegmentFilter(segment));
-        if (genre != null)
+        }
+        if (genre != null) {
             filtri.add(new GenreFilter(genre));
-        if (stateCode != null)
+        }
+        if (stateCode != null) {
             filtri.add(new StateFilter(stateCode));
-        if (priceMin != null || priceMax != null)
+        }
+        if (priceMin != null || priceMax != null) {
             filtri.add(new PriceRangeFilter(priceMin, priceMax));
-        if (from != null || to != null)
+        }
+        if (from != null || to != null) {
             filtri.add(new DateFilter(from, to));
+        }
     }
 
     public Vector<Filter> getFiltri() {
         return filtri;
     }
 
-    public void filter(Vector<Event> eventi) {
-        for (Filter filtro : filtri)
-            filtro.filter(eventi);
+    @SuppressWarnings("unchecked")
+	public Vector<Event> filter(Vector<Event> eventi) {
+    	Vector<Event> filteredEvents = (Vector<Event>) eventi.clone();
+    	
+        for (Filter filtro : filtri) {
+            filtro.filter(filteredEvents);
+        }
+        
+        return filteredEvents;
     }
 
     public void validate() throws WrongFormatDateException, WrongEndDateException, WrongStartDateException, WrongGenreException, WrongSegmentException, WrongStateException, WrongNegativePriceMinException, WrongPriceMaxException {
-        for (Filter filtro : filtri)
+        for (Filter filtro : filtri) {
             filtro.validate();
+        }
     }
 }
