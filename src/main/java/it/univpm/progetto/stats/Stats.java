@@ -31,4 +31,13 @@ public interface Stats {
      */
     public HashSet<String> getStates(Vector<Event> eventi);
 
+    /**
+     * Restituisce l'insieme dei valori minimo, massimo e medio degli eventi mensilmente e con date personalizzate
+     * 
+     * @param eventi
+     * @param weekNum
+     * @return
+     */
+    public HashMap<String, int[]> numEventsInterval(Vector<Event> eventi, int weekNum);
+
 }

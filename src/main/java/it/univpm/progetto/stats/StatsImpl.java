@@ -75,6 +75,7 @@ public class StatsImpl implements Stats {
         return statesCodes;
     }
 
+    @Override
     public HashMap<String, int[]> numEventsInterval(Vector<Event> eventi, int weekNum) {
         /*
          * La HashMap è del tipo: {"stato1" : (5,6,3), "stato2" : (12,4,11)}

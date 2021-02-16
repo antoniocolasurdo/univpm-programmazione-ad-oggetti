@@ -34,6 +34,7 @@ public class WrongNegativePriceMinException extends Exception {
 	 * 
 	 * @return <code>String</code>
 	 */
+	@Override
 	public String getMessage() {
 		return "Errore, il prezzo minimo non può essere minore di 0";
 	}

@@ -25,6 +25,7 @@ public class GenericException extends Exception {
 	/**
 	 * 
 	 */
+	@Override
 	public String getMessage() {
 		return message;
 	}

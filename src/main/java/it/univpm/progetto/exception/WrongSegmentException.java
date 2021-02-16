@@ -34,6 +34,7 @@ public class WrongSegmentException extends Exception {
 	 * 
 	 * @return <code>String</code>
 	 */
+	@Override
 	public String getMessage() {
 		return "Tipo inserito non valido (ammessi 'sport', 'music', 'theatre','miscellaneous')";
 	}

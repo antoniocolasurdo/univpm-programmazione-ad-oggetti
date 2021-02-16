@@ -34,6 +34,7 @@ public class WrongEndDateException extends Exception {
 	 * 
 	 * @return <code>String</code>
 	 */
+	@Override
 	public String getMessage() {
 		return "Errore, la data inserita non è valida!";
 	}

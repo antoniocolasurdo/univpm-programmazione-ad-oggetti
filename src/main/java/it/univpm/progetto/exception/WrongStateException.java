@@ -34,6 +34,7 @@ public class WrongStateException extends Exception {
 	 * 
 	 * @return <code>String</code>
 	 */
+	@Override
 	public String getMessage() {
 		return "Errore, il codice dello stato inserito non è valido!";
 	}

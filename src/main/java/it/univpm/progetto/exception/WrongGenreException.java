@@ -31,6 +31,7 @@ public class WrongGenreException extends Exception {
 	 * 
 	 * @return <code>String</code>
 	 */
+	@Override
 	public String getMessage() {
 		return "Errore, il genere inserito non è valido!";
 	}

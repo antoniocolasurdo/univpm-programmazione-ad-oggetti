@@ -34,6 +34,7 @@ public class WrongPriceMaxException extends Exception {
 	 * 
 	 * @return <code>String</code>
 	 */
+	@Override
 	public String getMessage() {
 		return "Errore, il prezzo massimo non può essere minore di quello minimo";
 	}
