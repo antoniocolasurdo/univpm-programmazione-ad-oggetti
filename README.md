@@ -33,7 +33,7 @@ Il massimo, minimo, media di eventi mensili, il numero totale di eventi e il num
 
 
 
-![Diagramma dei Casi D'Uso](C:\Users\serda\eclipse-workspace\univpm-programmazione-ad-oggetti\Img\Diagramma dei Casi D'Uso.png)
+![Diagramma dei Casi D'Uso.png](https://github.com/antoniocolasurdo/univpm-programmazione-ad-oggetti/blob/main/Img/Diagramma%20dei%20Casi%20D'Uso.png?raw=true)
 
 
 
