@@ -3,6 +3,7 @@ package it.univpm.progetto.stats;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Vector;
+
 import it.univpm.progetto.model.Event;
 
 public interface Stats {
@@ -12,7 +13,7 @@ public interface Stats {
      * 
      * @return
      */
-    public HashMap<String, Integer> getNumEvents(Vector<Event> eventi);
+    public HashMap<String, Integer> getNumEvents(Vector<Event> list);
 
     /**
      * Restituisce il numero di eventi presenti raggruppati per segmento e genere

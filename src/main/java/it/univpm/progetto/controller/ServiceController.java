@@ -14,7 +14,7 @@ import it.univpm.progetto.model.Event;
 import it.univpm.progetto.service.Service;
 
 @RestController
-public class Controller {
+public class ServiceController {
 	
 	@Autowired
 	private Service service;

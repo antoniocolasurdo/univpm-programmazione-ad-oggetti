@@ -7,7 +7,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import it.univpm.progetto.data.EventsData;
 import it.univpm.progetto.exception.GenericException;
 import it.univpm.progetto.model.*;
 
@@ -67,13 +67,6 @@ public class ServiceImpl implements Service {
      */
     @Autowired
     private RestTemplate restTemplate;
-
-    /**
-     * <p>
-     * Lista degli eventi recuperati da Ticket Master
-     * <p>
-     */ 
-    List<Event> events;
 	
 	public ServiceImpl() {
 
@@ -81,7 +74,7 @@ public class ServiceImpl implements Service {
 		objectMapper = new ObjectMapper();
 
 		// Lista degli eventi caricati da Ticket Master
-		events = new ArrayList<Event>();
+		//events = new ArrayList<Event>();
 		
 		// Leggo il file di configurazione contenente tutti i parametri di funzionamento del progetto
 		try {
@@ -106,6 +99,8 @@ public class ServiceImpl implements Service {
     */
 	@Override
 	public void readData() throws GenericException {
+		// Svuoto il contenuto della lista degli eventi
+		EventsData.getInstance().getEvents().clear();
 		
 		// Eseguo ciclo in funzione del numero di pagine
     	for (int index = 0; index < PAGES; index ++) {
@@ -208,7 +203,7 @@ public class ServiceImpl implements Service {
      */
 	@Override
 	public List<Event> getData() throws GenericException {
-		return events;
+		return EventsData.getInstance().getEvents(); //events;
 	}
 
 	
@@ -342,7 +337,8 @@ public class ServiceImpl implements Service {
 												if (venuesNode != null) {
 													processVenues(musicEvent, venuesNode);
 												}
-												events.add(musicEvent);
+												//events.add(musicEvent);
+												EventsData.getInstance().getEvents().add(musicEvent);
 												break;
 											}
 											case "Arts & Theatre":
@@ -358,7 +354,7 @@ public class ServiceImpl implements Service {
 												if (venuesNode != null) {
 													processVenues(artsAndTheatreEvent, venuesNode);
 												}
-												events.add(artsAndTheatreEvent);
+												EventsData.getInstance().getEvents().add(artsAndTheatreEvent);
 												break;
 											}
 											case "Sports":
@@ -374,7 +370,7 @@ public class ServiceImpl implements Service {
 												if (venuesNode != null) {
 													processVenues(sportEvent, venuesNode);
 												}
-												events.add(sportEvent);
+												EventsData.getInstance().getEvents().add(sportEvent);
 												break;
 											}
 											case "Miscellaneous":
@@ -390,7 +386,7 @@ public class ServiceImpl implements Service {
 												if (venuesNode != null) {
 													processVenues(miscellaneousEvent, venuesNode);
 												}
-												events.add(miscellaneousEvent);
+												EventsData.getInstance().getEvents().add(miscellaneousEvent);
 												break;
 											}
 										}

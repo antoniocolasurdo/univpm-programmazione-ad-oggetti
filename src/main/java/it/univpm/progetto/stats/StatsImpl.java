@@ -6,8 +6,12 @@ import java.time.temporal.WeekFields;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Vector;
+
+import org.springframework.stereotype.Service;
+
 import it.univpm.progetto.model.Event;
 
+@Service
 public class StatsImpl implements Stats {
 
     // Segmenti degli eventi
@@ -20,11 +24,15 @@ public class StatsImpl implements Stats {
          */
         HashMap<String, Integer> numEvents = new HashMap<String, Integer>();
         for (Event evento : eventi) {
-            int cont = 1;
-            String code = evento.getVenue().getStateCode(); // codice dello stato
-            if (numEvents.containsKey(code)) // Aggiorno il contatore
-                cont += numEvents.get(code);
-            numEvents.put(code, cont);
+            if (evento.getVenue() != null && evento.getVenue().getStateCode() != null) {
+            	
+	            int cont = 1;
+	            String code = evento.getVenue().getStateCode(); // codice dello stato
+	            if (numEvents.containsKey(code)) // Aggiorno il contatore
+	                cont += numEvents.get(code);
+	            numEvents.put(code, cont);
+
+            }
         }
         return numEvents;
     }
@@ -58,8 +66,11 @@ public class StatsImpl implements Stats {
     @Override
     public HashSet<String> getStates(Vector<Event> eventi) {
         HashSet<String> statesCodes = new HashSet<String>();
-        for (Event evento : eventi)
-            statesCodes.add(evento.getVenue().getStateCode());
+        for (Event evento : eventi) {
+        	if (evento.getVenue() != null && evento.getVenue().getStateCode() != null) {
+                statesCodes.add(evento.getVenue().getStateCode());
+        	}
+        }
         return statesCodes;
     }
 
