@@ -30,7 +30,62 @@ Il massimo, minimo, media di eventi mensili, il numero totale di eventi e il num
 
 # Diagrammi UML
 <b>Diagramma dei Casi d'Uso</b>
-![Utente] (https://raw.githubusercontent.com/antoniocolasurdo/univpm-programmazione-ad-oggetti/main/Img/Diagramma%20dei%20Casi%20D'Uso.png)
+
+
+
+![Diagramma dei Casi D'Uso](C:\Users\serda\eclipse-workspace\univpm-programmazione-ad-oggetti\Img\Diagramma dei Casi D'Uso.png)
+
+
+
+<b>Diagramma delle Sequenze</b>
+
+
+
+![Diagramma delle sequenze Filtro_Statistiche](C:\Users\serda\eclipse-workspace\univpm-programmazione-ad-oggetti\Img\Diagramma delle Sequenze\Diagramma delle sequenze Filtro_Statistiche.png)
+
+
+
+![Diagramma delle sequenze visualizza_tutti_eventi](C:\Users\serda\eclipse-workspace\univpm-programmazione-ad-oggetti\Img\Diagramma delle Sequenze\Diagramma delle sequenze visualizza_tutti_eventi.png)
+
+
+
+![Diagramma delle sequenze visualizza_statistiche_stati](C:\Users\serda\eclipse-workspace\univpm-programmazione-ad-oggetti\Img\Diagramma delle Sequenze\Diagramma delle sequenze visualizza_statistiche_stati.png)
+
+
+
+<b>Diagramma delle Classi</b>
+
+
+
+![progetto](C:\Users\serda\eclipse-workspace\univpm-programmazione-ad-oggetti\Img\Diagramma delle Classi\progetto.png)
+
+
+
+![Controller](C:\Users\serda\eclipse-workspace\univpm-programmazione-ad-oggetti\Img\Diagramma delle Classi\Controller.png)
+
+
+
+![Service](C:\Users\serda\eclipse-workspace\univpm-programmazione-ad-oggetti\Img\Diagramma delle Classi\Service.png)
+
+
+
+![Data_Model](C:\Users\serda\eclipse-workspace\univpm-programmazione-ad-oggetti\Img\Diagramma delle Classi\Data_Model.png)
+
+
+
+![Filter](C:\Users\serda\eclipse-workspace\univpm-programmazione-ad-oggetti\Img\Diagramma delle Classi\Filter.png)
+
+
+
+
+
+![Stats](C:\Users\serda\eclipse-workspace\univpm-programmazione-ad-oggetti\Img\Diagramma delle Classi\Stats.png)
+
+
+
+![Total_Class_diagram](C:\Users\serda\eclipse-workspace\univpm-programmazione-ad-oggetti\Img\Diagramma delle Classi\Total_Class_diagram.png)
+
+
 
 
 # Rotte
