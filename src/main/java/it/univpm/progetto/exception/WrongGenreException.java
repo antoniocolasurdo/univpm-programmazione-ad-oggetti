@@ -22,9 +22,9 @@ public class WrongGenreException extends Exception {
 		super();
 	}
 
-	public WrongGenreException(String string) {
-		// TODO Auto-generated constructor stub
-	}
+    public WrongGenreException(String message) {
+        super(message);
+    }
 
 	/**
 	 * Questo metodo ritorna una stringa che descrive l'errore
