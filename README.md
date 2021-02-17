@@ -242,6 +242,16 @@ Abbiamo gestito le eccezioni creando nove nuove classi:
 
 # Test
 
+Di seguito sono elencati i test unitari inseriti nel progetto:
+
+| Nome della routine di test  | Descrizione                                                  |
+| --------------------------- | ------------------------------------------------------------ |
+| readDataTicketMaster        | Verifica se i dati letti da Ticket Master sono dello stesso numero richiesto |
+| getNumEventWithoutAnyFilter | Verifica se sono recuperati gli eventi ai fini delle statistiche |
+| filterWithException         | Verifica eccezione sul filtro data iniziale                  |
+| getStatesNotIsNull          | Verifica che il recupero degli stati non sia nullo           |
+
+
 
 # Tecnologie utilizzate
 
