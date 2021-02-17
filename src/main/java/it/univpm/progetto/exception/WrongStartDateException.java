@@ -22,9 +22,14 @@ public class WrongStartDateException extends Exception {
 		super();
 	}
 	
-	public WrongStartDateException(String string) {
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * Costruttore
+     * 
+     * @param message
+     */
+    public WrongStartDateException(String message) {
+        super(message);
+    }
 
 	/**
 	 * Questo metodo ritorna una stringa che descrive l'errore

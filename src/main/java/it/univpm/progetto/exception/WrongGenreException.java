@@ -21,10 +21,15 @@ public class WrongGenreException extends Exception {
 	public WrongGenreException() {
 		super();
 	}
-
-	public WrongGenreException(String string) {
-		// TODO Auto-generated constructor stub
-	}
+	
+    /**
+     * Costruttore
+     * 
+     * @param message
+     */
+    public WrongGenreException(String message) {
+        super(message);
+    }
 
 	/**
 	 * Questo metodo ritorna una stringa che descrive l'errore
