@@ -6,32 +6,31 @@ import java.time.temporal.WeekFields;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Vector;
-
 import org.springframework.stereotype.Service;
-
+import it.univpm.progetto.model.ArtsAndTheatreEvent;
 import it.univpm.progetto.model.Event;
+import it.univpm.progetto.model.MiscellaneousEvent;
+import it.univpm.progetto.model.MusicEvent;
+import it.univpm.progetto.model.SportEvent;
 
 @Service
 public class StatsImpl implements Stats {
 
-    // Segmenti degli eventi
-    private static String[] segments = { "Sports", "Music", "Arts & Theatre", "Miscellaneous" };
-
     @Override
     public HashMap<String, Integer> getNumEvents(Vector<Event> eventi) {
-		
+
         /*
          * La HashMap è del tipo: {"stato1" : 10, "stato2" : 12, ecc..}
          */
         HashMap<String, Integer> numEvents = new HashMap<String, Integer>();
         for (Event evento : eventi) {
             if (evento.getVenue() != null && evento.getVenue().getStateCode() != null) {
-            	
-	            int cont = 1;
-	            String code = evento.getVenue().getStateCode(); // codice dello stato
-	            if (numEvents.containsKey(code)) // Aggiorno il contatore
-	                cont += numEvents.get(code);
-	            numEvents.put(code, cont);
+
+                int cont = 1;
+                String code = evento.getVenue().getStateCode(); // codice dello stato
+                if (numEvents.containsKey(code)) // Aggiorno il contatore
+                    cont += numEvents.get(code);
+                numEvents.put(code, cont);
 
             }
         }
@@ -42,23 +41,30 @@ public class StatsImpl implements Stats {
     public HashMap<String, int[]> getNumEventsGenre(Vector<Event> eventi) {
         /*
          * La HashMap è del tipo: {"stato1" : (5,6,3,2), "stato2" : (12,4,11,5)}
-         * Il posizione dei numeri segue quella del vettore di segments (es: nello stato1 ci sono 
-         * 5 eventi spotivi, 6 musicali, ecc...
+         * Il posizione dei numeri è la seguente: { "Sports", "Music", "Arts & Theatre", "Miscellaneous" };
+         * (es: nello stato1 ci sono 5 eventi spotivi, 6 musicali, ecc...)
          */
         // eventi raggruppati per stato e segment
         HashMap<String, int[]> numEventsGen = new HashMap<String, int[]>();
         for (String stato : this.getStates(eventi))
-            numEventsGen.put(stato, new int[segments.length]); // Inizializzazione valori HashMap
+            numEventsGen.put(stato, new int[4]); // Inizializzazione valori HashMap
 
         for (Event evento : eventi) {
             String code = evento.getVenue().getStateCode(); // codice dello stato
-            int[] num = numEventsGen.get(code);
-            for (int i = 0; i < segments.length; i++) { // Incrementa il contatore eventi per tipo di genere
-                if (evento.getGenre().equals(segments[i])) {
-                    num[i]++;
-                    numEventsGen.put(code, num);
-                    break;
-                }
+            if (code != null) {
+                int[] num = numEventsGen.get(code); // Array contatore eventi per ogni genere
+                // Incremento dei contatori in base al tipo di evento
+                if (evento instanceof SportEvent)
+                    num[0]++;
+                else if (evento instanceof MusicEvent)
+                    num[1]++;
+                else if (evento instanceof ArtsAndTheatreEvent)
+                    num[2]++;
+                else if (evento instanceof MiscellaneousEvent)
+                    num[3]++;
+                else
+                    continue;
+                numEventsGen.put(code, num);
             }
         }
         return numEventsGen;
@@ -68,9 +74,9 @@ public class StatsImpl implements Stats {
     public HashSet<String> getStates(Vector<Event> eventi) {
         HashSet<String> statesCodes = new HashSet<String>();
         for (Event evento : eventi) {
-        	if (evento.getVenue() != null && evento.getVenue().getStateCode() != null) {
+            if (evento.getVenue() != null && evento.getVenue().getStateCode() != null) {
                 statesCodes.add(evento.getVenue().getStateCode());
-        	}
+            }
         }
         return statesCodes;
     }
@@ -85,7 +91,7 @@ public class StatsImpl implements Stats {
 
         HashMap<String, int[]> numEvents = new HashMap<String, int[]>();
         for (String stato : this.getStates(eventi))
-            numEvents.put(stato, new int[segments.length]); // Inizializzazione valori HashMap
+            numEvents.put(stato, new int[4]); // Inizializzazione valori HashMap
 
         // create WeekFields 
         WeekFields weekFields = WeekFields.of(DayOfWeek.MONDAY, 1);
