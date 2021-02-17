@@ -150,7 +150,25 @@ Il package ***stats*** contiene l'interfaccia *Stats* che estende la classe *Sta
 
 ![Exception.png](https://github.com/antoniocolasurdo/univpm-programmazione-ad-oggetti/blob/main/Img/Diagramma%20delle%20Classi/Exception.png?raw=true)
 
-Ne parliamo nel capitolo di gestione delle Eccezioni:
+Abbiamo gestito le eccezioni creando nove nuove classi:
+
+1) *WrongEndDateException*: viene generata quando l'utente inserisce una data finale inferiore alla data iniziale
+
+2) *WrongStartDateException*: viene generata quando l'utente inserisce una data inferiore alla lettura dei dati di TicketMaster
+
+3) *WrongFormatDateException*: viene generata quando l'utente inserisce una data in un formato non valido
+
+4) *WrongNegativePriceMinException*: viene generata quando l'utente inserisce un prezzo minimo minore di 0
+
+5) *WrongPriceMaxException*: viene generata quando l'utente inserisce un prezzo massimo che è minore di quello minimo
+
+6) *WrongStateException*: viene generata quando l'utente inserisce un nome errato per il codice dello stato
+
+7) *WrongSegmentException*: viene generata quando l'utente inserisce un nome errato per il segment
+
+8) *WrongGenreException*: viene generata quando l'utente inserisce un genere non presente oppure scritto in modo erroneo
+
+9) *GenericException*: viene generata per prevenire errori non gestiti
 
 
 
@@ -236,8 +254,10 @@ Abbiamo gestito le eccezioni creando nove nuove classi:
 
   [PostMan](https://www.postman.com) - Software per l'API Testing
 
+  [UMLDesigner ](http://www.umldesigner.org/) - utilizzato per il diagramma dei casi d'uso
+
   [Draw.io](https://app.diagrams.net) - utilizzato per il diagramma delle classi e delle sequenze
-  
+
   [Typora](https://typora.io) - usato per scrivere il ReadMe.md in formato Markdown
 
 - TicketMaster API:
