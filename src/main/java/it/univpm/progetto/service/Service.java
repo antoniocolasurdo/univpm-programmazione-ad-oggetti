@@ -11,11 +11,21 @@ import it.univpm.progetto.model.Event;
 public interface Service {
 
 	/**
-	 * Metodo di recupero dei dati da Ticket Master
+	 * Metodo di recupero dei dati da Ticket Master utilizzando i parametri di configurazione del file <b>config.json</b>
 	 *
-	 * @throws GenericException 
+	 * @throws GenericException
 	 */
 	public void readData() throws GenericException;
+
+	/**
+	 * Metodo di recupero dei dati da Ticket Master utilizzando numero di pagine e grandezza specifici
+	 * 
+	 * @param pages indica il numero di pagine dati da leggere su TicketMaster
+	 * @param size indica il numero di elementi di una pagina
+	 *
+	 * @throws GenericException
+	 */
+	public void readData(int pages, int size) throws GenericException;
 
 	/**
 	 * Metodo di recupero dei metadati utilizzati nel modello dati del progetto

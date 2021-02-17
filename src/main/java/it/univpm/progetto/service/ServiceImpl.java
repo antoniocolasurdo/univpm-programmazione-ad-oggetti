@@ -61,8 +61,9 @@ public class ServiceImpl implements Service {
 	
     /**
      * <p>
-     * @see https://www.baeldung.com/
      * Oggetto RestTemplate utilizzato per accedere all'API Get messa a disposizione da Ticket Master
+     * 
+     * @see https://www.baeldung.com/
      * <p>
      */
     @Autowired
@@ -93,22 +94,33 @@ public class ServiceImpl implements Service {
 	
 	/**
      * <p>
-     * Funzione di lettura dati per leggere i dati di TicketMaster di un numero <i>PAGES</i> di pagine
+     * Funzione di lettura dati per leggere da TicketMaster in base ai parametri <i>PAGES</i> (numero di pagine) e per una grandezza pari a <i>SIZE</i>
      * <p>
-	 * @throws Exception 
+	 * @throws GenericException 
     */
 	@Override
 	public void readData() throws GenericException {
+		readData(PAGES, SIZE);
+	}
+
+	/**
+     * <p>
+     * Funzione di lettura dati per leggere da TicketMaster in base ai parametri <i>PAGES</i> (numero di pagine) e per una grandezza pari a <i>SIZE</i>
+     * <p>
+	 * @throws GenericException 
+    */
+	@Override
+	public void readData(int pages, int size) throws GenericException {
 		// Svuoto il contenuto della lista degli eventi
 		EventsData.getInstance().getEvents().clear();
 		
 		// Eseguo ciclo in funzione del numero di pagine
-    	for (int index = 0; index < PAGES; index ++) {
+    	for (int index = 0; index < pages; index ++) {
     		
     		LOG.info("Caricamento dati da Ticket Master, pagina " + index);
 
     		// Recupero il contenuto dei dati in una risposta contenente una stringa
-    		ResponseEntity<String> response = restTemplate.getForEntity(getTicketMasterUrl(index), String.class);
+    		ResponseEntity<String> response = restTemplate.getForEntity(getTicketMasterUrl(index, size), String.class);
 
     		// Se la risposta è andata a buon fine (codice 200) carico i dati altrimenti segnalo errore
         	if (response.getStatusCode() == HttpStatus.OK) {
@@ -120,7 +132,6 @@ public class ServiceImpl implements Service {
         	}
     	}
 		LOG.info("Caricamento dati da Ticket Master avvenuto correttamente!");
-
 	}
 
 	/**
@@ -212,14 +223,14 @@ public class ServiceImpl implements Service {
 	 * Funzione di costruzione della URL che accede a Ticket Master in base al numero di pagina
 	 * <p>
 	 */
-	private String getTicketMasterUrl(int page) {
+	private String getTicketMasterUrl(int page, int size) {
     	String result = "";
     	
     	result += TICKET_MASTER_URL;
     	result += "?" + TICKET_MASTER_FILTER;
     	result += "&" + TICKET_MASTER_API_KEY;
     	result += "&page=" + page;
-    	result += "&size=" + SIZE;
+    	result += "&size=" + size;
     	
     	return result;
 	}
