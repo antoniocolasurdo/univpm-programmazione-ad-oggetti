@@ -25,8 +25,18 @@
 
 # Introduzione
 
-Il programma permette di vedere tutti gli eventi degli USA recuperando i dati tramite una chiamata API da TicketMaster; l'utente può visualizzare l'id dell'evento, il nome dell'evento, la data, l'ora, il range di prezzo del biglietto, lo stato e la città dove si svolgerà l'evento, la categoria (che può essere: sportiva, musicale, artistica/teatrale o eventi sul ghiaccio) e il genere (football,rock,pop, hockey, teatro,...), e una descrizione generale di cosa tratta l'evento. I dati possono essere filtrati per uno o più stati, un certo intervallo di data, una categoria o uno o più generi appartenenti ad una determinata categoria. Sarà inoltre possibile vedere delle statistiche quali:
-Il massimo, minimo, media di eventi mensili, il numero totale di eventi e il numero totale di eventi filtrato per genere.
+Il programma permette di vedere tutti gli eventi degli USA recuperando i dati tramite una chiamata API da TicketMaster; l'utente può visualizzare l'id dell'evento, il nome dell'evento, la data, l'ora, il range di prezzo del biglietto, lo stato e la città dove si svolgerà l'evento, la categoria (che può essere: sportiva, musicale, artistica/teatrale o eventi sul ghiaccio) e il genere (football,rock,pop, hockey, teatro,...), e una descrizione generale di cosa tratta l'evento. L'utente sarà in grado di visualizzare le statistiche richieste nei requisiti del progetto: 
+1. Numero totale di eventi per ogni Stato
+2. Numero di eventi raggruppati per genere
+3. Numero medio/massimo/minimo di eventi mensili
+
+Inoltre l'utente può filtrare opzionalmente gli eventi per i seguenti elementi:
+1. Uno o più tipi di evento
+2. Uno o più stati 
+3. Uno o più generi
+4. Periodo personalizzato
+5. Prezzo minimo e prezzo massimo
+
 
 # Diagrammi UML
 <b>Diagramma dei Casi d'Uso</b>
@@ -104,10 +114,27 @@ Le richieste che l'utente può effettuare tramite Postman devono essere effettua
 
 
 
-# Rotte relative ai Filter
+# Rotte relative alle Statistiche
+
+| Tipo | Rotta                      | Descrizione                                                  |
+| :--- | :------------------------- | :----------------------------------------------------------- |
+| POST | "/stats/numEvents"         | Recupera il numero di eventi per ogni StateCode              |
+| POST | "/stats/numEventsGenre"    | Recupera il numero di eventi per ogni genere                 |
+| POST | "/stats/getStates"         | Recupera tutti gli StateCode presenti nel vettore degli eventi |
+| POST | "/stats/numEventsInterval" | Recupera gli eventi minimo, massimo e medio per un intervallo di date personalizzato |
 
 
-# Rotte relative alle Stats
+### Filtri utilizzabili in tutte le rotte delle statistiche
+
+| BodyParameters | Description                                      | Type   | Example          |
+| -------------- | ------------------------------------------------ | ------ | ---------------- |
+| "segment"      | Filtra gli eventi per il tipo                    | String | "music, sport"   |
+| "genre"        | Filtra gli eventi per il genere                  | String | "Rock, Baseball" |
+| "state"        | Filtra gli eventi per il codice dello stato      | String | "FL,LA"          |
+| "priceMin"     | Filtra gli eventi per un range di prezzo minimo  | float  | "40.6"           |
+| "priceMax"     | Filtra gli eventi per un range di prezzo massimo | float  | "100.8"          |
+| "startDate"    | Filtra gli eventi a partita dalla data inserita  | String | "01/04/2021"     |
+| "endDate"      | Filtra gli eventi fino alla data inserita        | String | "31/12/2021"     |
 
 
 # Gestione Eccezioni
@@ -135,7 +162,6 @@ Le richieste che l'utente può effettuare tramite Postman devono essere effettua
 
   [TicketMaster](https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/) - Documentazione API TicketMaster 
 
-- Implentazione per Java (librerie utilizzate):
 
 
 
