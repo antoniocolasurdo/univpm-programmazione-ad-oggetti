@@ -223,21 +223,73 @@ Abbiamo gestito le eccezioni creando nove nuove classi:
 
 1) *WrongEndDateException*: viene generata quando l'utente inserisce una data finale inferiore alla data iniziale
 
+​     es: non posso mettere come EndDate "31/03/2021" se la startDate "01/04/2021" è il giorno ad esso successivo
+
+![EndDateException.png](https://github.com/antoniocolasurdo/univpm-programmazione-ad-oggetti/blob/main/Img/Exception_Example/EndDateException.png?raw=true)
+
+
+
 2) *WrongStartDateException*: viene generata quando l'utente inserisce una data inferiore alla lettura dei dati di TicketMaster
+
+​     es: non posso mettere come startDate "01/04/2019" se come data è stata superata
+
+![StartDateException.png](https://github.com/antoniocolasurdo/univpm-programmazione-ad-oggetti/blob/main/Img/Exception_Example/StartDateException.png?raw=true)o
+
+
 
 3) *WrongFormatDateException*: viene generata quando l'utente inserisce una data in un formato non valido
 
+​     es: non posso mettere come startDate "01/13/2019" in quanto non esiste il 13° mese o comunque non posso invertire i giorni e i mesi perchè avrei errore di formato
+
+![FormatDateException.png](https://github.com/antoniocolasurdo/univpm-programmazione-ad-oggetti/blob/main/Img/Exception_Example/FormatDateException.png?raw=true)
+
+
+
 4) *WrongNegativePriceMinException*: viene generata quando l'utente inserisce un prezzo minimo minore di 0
+
+​     es: non posso mettere come priceMin "-10.6" il prezzo non può essere negativo
+
+![negativePriceMinException.png](https://github.com/antoniocolasurdo/univpm-programmazione-ad-oggetti/blob/main/Img/Exception_Example/negativePriceMinException.png?raw=true)
+
+
 
 5) *WrongPriceMaxException*: viene generata quando l'utente inserisce un prezzo massimo che è minore di quello minimo
 
+​     es: non posso mettere come priceMax "9.6" se priceMin "10.6" è maggiore
+
+![PriceMaxException.png](https://github.com/antoniocolasurdo/univpm-programmazione-ad-oggetti/blob/main/Img/Exception_Example/PriceMaxException.png?raw=true)
+
+
+
 6) *WrongStateException*: viene generata quando l'utente inserisce un nome errato per il codice dello stato
+
+es: non posso mettere come state "rtys" perchè nessuno stateCode è associato a quei caratteri
+
+![stateException.png](https://github.com/antoniocolasurdo/univpm-programmazione-ad-oggetti/blob/main/Img/Exception_Example/stateException.png?raw=true)
+
+
 
 7) *WrongSegmentException*: viene generata quando l'utente inserisce un nome errato per il segment
 
+es: non posso mettere come segment "ghianda" posso mettere solo 'sport' 'music' 'theatre' 'miscellaneous'
+
+![segmentexception.png](https://github.com/antoniocolasurdo/univpm-programmazione-ad-oggetti/blob/main/Img/Exception_Example/segmentexception.png?raw=true)
+
+
+
 8) *WrongGenreException*: viene generata quando l'utente inserisce un genere non presente oppure scritto in modo erroneo
 
+es: non posso mettere come genere uno spazio vuoto se voglio filtrare per genere 
+
+![genreexception.png](https://github.com/antoniocolasurdo/univpm-programmazione-ad-oggetti/blob/main/Img/Exception_Example/genreexception.png?raw=true)
+
+
+
+
+
 9) *GenericException*: viene generata per prevenire errori non gestiti
+
+
 
 
 # Test
