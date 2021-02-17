@@ -82,16 +82,16 @@ public class StatsImpl implements Stats {
     }
 
     @Override
-    public HashMap<String, int[]> numEventsInterval(Vector<Event> eventi, int weekNum) {
+    public HashMap<String, ValoriMinimoMassimoMedio> numEventsInterval(Vector<Event> eventi, int weekNum) {
         /*
          * La HashMap è del tipo: {"stato1" : (5,6,3), "stato2" : (12,4,11)}
          * Il posizione dei numeri segue quella di valore (min, max, medio)
          * weekNum è l'unità espressa in settimane su cui basare il calcolo (weekNum=4 --> statistica mensile)
          */
 
-        HashMap<String, int[]> numEvents = new HashMap<String, int[]>();
-        for (String stato : this.getStates(eventi))
-            numEvents.put(stato, new int[4]); // Inizializzazione valori HashMap
+        HashMap<String, ValoriMinimoMassimoMedio> numEvents = new HashMap<String, ValoriMinimoMassimoMedio>();
+//        for (String stato : this.getStates(eventi))
+//            numEvents.put(stato, new int[4]); // Inizializzazione valori HashMap
 
         // create WeekFields 
         WeekFields weekFields = WeekFields.of(DayOfWeek.MONDAY, 1);
@@ -107,35 +107,42 @@ public class StatsImpl implements Stats {
         int n = ((endWeek - startWeek) / weekNum) + 1; // numero di settori temporali
 
         for (String stato : this.getStates(eventi)) {
-            for (Event evento : eventi) {
-                int[] valori = new int[n]; // numero degli eventi in ogni settore temporale
-                if (evento.getVenue().getStateCode().equals(stato)) {
+
+            int[] valori = new int[n]; // numero degli eventi in ogni settore temporale
+
+        	for (Event evento : eventi) {
+                if (evento.getVenue() != null && evento.getVenue().getStateCode() != null && evento.getVenue().getStateCode().equals(stato)) {
                     // per ogni stato calcolo il valore min, max, medio
                     int eventWeek = evento.getDates().getLocalDate().get(weekOfYear); // numero settimana dell'evento
-                    for (int i = 1; i <= n; i++) {
-                        if (eventWeek <= startWeek + weekNum * i) { // incremento il settore temporale i-esimo
+                    for (int i = 0; i < n; i++) {
+                        if (eventWeek <= startWeek + weekNum * (i + 1)) { // incremento il settore temporale i-esimo
                             valori[i]++;
                             break;
                         }
                     }
-                    // Calcolo valore min, max e medio basandomi sul vettore valori
-                    int[] stats = { valori[0], valori[0], 0 };
-                    // Minimo e massimo
-                    int sum = 0;
-                    for (Integer valore : valori) {
-                        sum += valore;
-                        if (valore < stats[0]) // nuovo minimo
-                            stats[0] = valore;
-                        else if (valore > stats[1]) // nuovo massimo
-                            stats[1] = valore;
-                    }
-                    // Media
-                    stats[2] = sum / valori.length;
-                    // Aggiorna la HashMap
-                    numEvents.put(stato, stats);
                 }
             }
+
+        	ValoriMinimoMassimoMedio valoriCalcolati = new ValoriMinimoMassimoMedio(valori[0], valori[0], 0);
+            // Calcolo valore min, max e medio basandomi sul vettore valori
+            //int[] stats = { valori[0], valori[0], 0 };
+
+            // Minimo e massimo
+            float sum = 0;
+            for (Integer valore : valori) {
+                sum += valore;
+                if (valore < valoriCalcolati.getMinimo()) // nuovo minimo
+                	valoriCalcolati.setMinimo(valore);
+                else if (valore > valoriCalcolati.getMassimo()) // nuovo massimo
+                    valoriCalcolati.setMassimo(valore);
+            }
+            // Media
+            valoriCalcolati.setMedia(sum / valori.length);
+            //stats[2] = sum / valori.length;
+            // Aggiorna la HashMap
+            numEvents.put(stato, valoriCalcolati);
         }
+
         return numEvents;
     }
 

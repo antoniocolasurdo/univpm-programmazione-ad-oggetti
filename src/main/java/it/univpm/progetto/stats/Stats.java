@@ -38,6 +38,6 @@ public interface Stats {
      * @param weekNum
      * @return
      */
-    public HashMap<String, int[]> numEventsInterval(Vector<Event> eventi, int weekNum);
+    public HashMap<String, ValoriMinimoMassimoMedio> numEventsInterval(Vector<Event> eventi, int weekNum);
 
 }

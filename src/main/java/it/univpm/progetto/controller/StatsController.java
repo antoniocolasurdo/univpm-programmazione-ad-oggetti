@@ -24,6 +24,7 @@ import it.univpm.progetto.exception.WrongStateException;
 import it.univpm.progetto.filter.FilterManager;
 import it.univpm.progetto.model.*;
 import it.univpm.progetto.stats.Stats;
+import it.univpm.progetto.stats.ValoriMinimoMassimoMedio;
 
 @RestController
 public class StatsController {
@@ -144,7 +145,7 @@ public class StatsController {
 	 * @throws WrongFormatDateException 
 	 */
 	@PostMapping("/stats/numEventsInterval")
-	public HashMap<String, int[]> numEventsInterval(@RequestBody(required = false) FilterManager filterManager, @RequestParam(name = "weekNum", required = false, defaultValue = "4") int weekNum) {
+	public HashMap<String, ValoriMinimoMassimoMedio> numEventsInterval(@RequestBody(required = false) FilterManager filterManager, @RequestParam(name = "weekNum", required = false, defaultValue = "4") int weekNum) {
 		try {
 			if (filterManager != null) {
 				filterManager.validate();
