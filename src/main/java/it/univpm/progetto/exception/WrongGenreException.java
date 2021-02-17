@@ -21,7 +21,12 @@ public class WrongGenreException extends Exception {
 	public WrongGenreException() {
 		super();
 	}
-
+	
+    /**
+     * Costruttore
+     * 
+     * @param message
+     */
     public WrongGenreException(String message) {
         super(message);
     }
