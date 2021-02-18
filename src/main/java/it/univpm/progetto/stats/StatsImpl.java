@@ -55,30 +55,49 @@ public class StatsImpl implements Stats {
 	 * 
 	 * @return numEventsGen
 	 */
-    @Override
-    public HashMap<String, int[]> getNumEventsGenre(Vector<Event> eventi) {
+    @SuppressWarnings("serial")
+	@Override
+    public HashMap<String, HashMap<String, Integer>> getNumEventsGenre(Vector<Event> eventi) {
  
         // eventi raggruppati per stato e segment
-        HashMap<String, int[]> numEventsGen = new HashMap<String, int[]>();
-        for (String stato : this.getStates(eventi))
-            numEventsGen.put(stato, new int[4]); // Inizializzazione valori HashMap
+        HashMap<String, HashMap<String, Integer>> numEventsGen = new HashMap<String, HashMap<String, Integer>>();
+        for (String stato : this.getStates(eventi)) {
+            numEventsGen.put(stato, new HashMap<String, Integer>() {{
+            	put("Sport", 0);
+            	put("Music", 0);
+            	put("ArtsAndTheatre", 0);
+            	put("Miscellaneous", 0);            	
+            }}); // Inizializzazione valori HashMap
+        }
 
         for (Event evento : eventi) {
             String code = evento.getVenue().getStateCode(); // codice dello stato
             if (code != null) {
-                int[] num = numEventsGen.get(code); // Array contatore eventi per ogni genere
+                HashMap<String, Integer> map = numEventsGen.get(code); // Array contatore eventi per ogni genere
                 // Incremento dei contatori in base al tipo di evento
-                if (evento instanceof SportEvent)
-                    num[0]++;
-                else if (evento instanceof MusicEvent)
-                    num[1]++;
-                else if (evento instanceof ArtsAndTheatreEvent)
-                    num[2]++;
-                else if (evento instanceof MiscellaneousEvent)
-                    num[3]++;
+                if (evento instanceof SportEvent) {
+                	int sportCounter = map.get("Sport");
+                	sportCounter++;
+                	map.put("Sport", sportCounter);
+                }
+                else if (evento instanceof MusicEvent) {
+                	int musicCounter = map.get("Music");
+                	musicCounter++;
+                	map.put("Music", musicCounter);
+                }
+                else if (evento instanceof ArtsAndTheatreEvent) {
+                	int artsAndTheatreCounter = map.get("ArtsAndTheatre");
+                	artsAndTheatreCounter++;
+                	map.put("ArtsAndTheatre", artsAndTheatreCounter);
+                }
+                else if (evento instanceof MiscellaneousEvent) {
+                	int miscellaneousCounter = map.get("Miscellaneous");
+                	miscellaneousCounter++;
+                	map.put("Miscellaneous", miscellaneousCounter);
+                }
                 else
                     continue;
-                numEventsGen.put(code, num);
+                numEventsGen.put(code, map);
             }
         }
         return numEventsGen;

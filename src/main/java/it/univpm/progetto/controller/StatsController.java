@@ -75,7 +75,7 @@ public class StatsController {
 	 * @return numEventsGen
 	 */
 	@PostMapping("/stats/numEventsGenre")
-	public HashMap<String, int[]> getNumEventsGenre(@RequestBody(required = false) FilterManager filterManager) {
+	public HashMap<String, HashMap<String, Integer>> getNumEventsGenre(@RequestBody(required = false) FilterManager filterManager) {
 		try {
 			// Se viene introdotto un filtro quindi filterManager non è nullo allora fa la validazione 
 			if (filterManager != null) {

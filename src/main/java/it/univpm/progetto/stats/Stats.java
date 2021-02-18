@@ -31,7 +31,7 @@ public interface Stats {
      *  
      * @return numEventsGen
      */
-    public HashMap<String, int[]> getNumEventsGenre(Vector<Event> eventi);
+    public HashMap<String, HashMap<String, Integer>> getNumEventsGenre(Vector<Event> eventi);
 
     /**
      * <p>Restituisce l'insieme degli statescodes in cui si terranno gli eventi</p>
