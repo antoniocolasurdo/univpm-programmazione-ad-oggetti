@@ -13,9 +13,9 @@ import it.univpm.progetto.exception.*;
  * 
  *         <p>
  *         <b>Classe</b> che modella il filtro sulle date, estendendo la superclasse Filter.
- *         <b>utilizzando 2 valori di filtraggio, uno per l'estremo inferiore dell'intervallo
+ *         utilizzando 2 valori di filtraggio, uno per l'estremo inferiore dell'intervallo
  *         StartDate, uno per l'estremo superiore dell'intervallo EndDate.
- *         <p>
+ *         </p>
  */
 
 public class DateFilter extends Filter {
@@ -35,8 +35,8 @@ public class DateFilter extends Filter {
     /**
      * Costruttore
      * 
-     * @param StartDate
-     * @param EndDate
+     * @param startDate data iniziale
+     * @param endDate data finale
      */
     public DateFilter(String startDate, String endDate) {
         super();
@@ -82,6 +82,7 @@ public class DateFilter extends Filter {
         }
     }
 
+    // Vengono recuperate le eccezioni date da delle date filtrate errate
     @Override
     public void validate() throws WrongEndDateException, WrongFormatDateException, WrongStartDateException {
         LocalDate from = null, to = null;

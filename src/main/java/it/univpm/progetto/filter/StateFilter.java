@@ -11,7 +11,7 @@ import it.univpm.progetto.model.Event;
  * 
  * <p>
  * <b>Classe</b> che modella il filtro sugli stati degli eventi, estendendo la superclasse Filter.
- * <p>
+ * </p>
  */
 
 public class StateFilter extends Filter {
@@ -45,6 +45,7 @@ public class StateFilter extends Filter {
         }
     }
 
+    // Recupera le eccezioni di stato filtrato errato
     @Override
     public void validate() throws WrongStateException {
     	for (int index = 0; index < filteredStateCodes.length; index++) {

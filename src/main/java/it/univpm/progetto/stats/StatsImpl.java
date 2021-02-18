@@ -13,15 +13,26 @@ import it.univpm.progetto.model.MiscellaneousEvent;
 import it.univpm.progetto.model.MusicEvent;
 import it.univpm.progetto.model.SportEvent;
 
+/**
+ * @author Antonio Colasurdo e Daniele Sergiacomi
+ * 
+ * <p>
+ * <b>Classe</b> che implementa tutte le funzioni relative alle statistiche
+ * </p>
+ */
 @Service
 public class StatsImpl implements Stats {
 
+	/**
+	 * 
+	 * <p>La HashMap è del tipo: {"stato1" : 10, "stato2" : 12, ecc..}</p>
+	 * 
+	 * @return numEvents
+	 */
     @Override
     public HashMap<String, Integer> getNumEvents(Vector<Event> eventi) {
 
-        /*
-         * La HashMap è del tipo: {"stato1" : 10, "stato2" : 12, ecc..}
-         */
+
         HashMap<String, Integer> numEvents = new HashMap<String, Integer>();
         for (Event evento : eventi) {
             if (evento.getVenue() != null && evento.getVenue().getStateCode() != null) {
@@ -37,13 +48,16 @@ public class StatsImpl implements Stats {
         return numEvents;
     }
 
+	/**
+	 * 
+	 * <p>La HashMap è del tipo: {"stato1" : (5,6,3,2), "stato2" : (12,4,11,5)}</p>
+	 * <p>Il posizione dei numeri è la seguente: { "Sports", "Music", "Arts e Theatre", "Miscellaneous" }; (es: nello stato1 ci sono 5 eventi spotivi, 6 musicali, ecc...)</p>
+	 * 
+	 * @return numEventsGen
+	 */
     @Override
     public HashMap<String, int[]> getNumEventsGenre(Vector<Event> eventi) {
-        /*
-         * La HashMap è del tipo: {"stato1" : (5,6,3,2), "stato2" : (12,4,11,5)}
-         * Il posizione dei numeri è la seguente: { "Sports", "Music", "Arts & Theatre", "Miscellaneous" };
-         * (es: nello stato1 ci sono 5 eventi spotivi, 6 musicali, ecc...)
-         */
+ 
         // eventi raggruppati per stato e segment
         HashMap<String, int[]> numEventsGen = new HashMap<String, int[]>();
         for (String stato : this.getStates(eventi))
@@ -70,6 +84,11 @@ public class StatsImpl implements Stats {
         return numEventsGen;
     }
 
+	/**
+	 * <p>Recupero stati</p>
+	 * 
+	 * @return statesCodes
+	 */
     @Override
     public HashSet<String> getStates(Vector<Event> eventi) {
         HashSet<String> statesCodes = new HashSet<String>();
@@ -81,17 +100,20 @@ public class StatsImpl implements Stats {
         return statesCodes;
     }
 
+	/**
+	 * 
+	 * <p>La HashMap è del tipo: {"stato1" : (5,6,3), "stato2" : (12,4,11)}</p>
+	 * <p>Il posizione dei numeri segue quella di valore (min, max, medio)</p>
+	 * <p>weekNum è l'unità espressa in settimane su cui basare il calcolo (weekNum = 4 indica una statistica mensile)</p>
+	 * 
+	 * @return numEvents
+	 */
     @Override
     public HashMap<String, ValoriMinimoMassimoMedio> numEventsInterval(Vector<Event> eventi, int weekNum) {
-        /*
-         * La HashMap è del tipo: {"stato1" : (5,6,3), "stato2" : (12,4,11)}
-         * Il posizione dei numeri segue quella di valore (min, max, medio)
-         * weekNum è l'unità espressa in settimane su cui basare il calcolo (weekNum=4 --> statistica mensile)
-         */
+  
 
         HashMap<String, ValoriMinimoMassimoMedio> numEvents = new HashMap<String, ValoriMinimoMassimoMedio>();
-//        for (String stato : this.getStates(eventi))
-//            numEvents.put(stato, new int[4]); // Inizializzazione valori HashMap
+
 
         // create WeekFields 
         WeekFields weekFields = WeekFields.of(DayOfWeek.MONDAY, 1);
@@ -125,7 +147,6 @@ public class StatsImpl implements Stats {
 
         	ValoriMinimoMassimoMedio valoriCalcolati = new ValoriMinimoMassimoMedio(valori[0], valori[0], 0);
             // Calcolo valore min, max e medio basandomi sul vettore valori
-            //int[] stats = { valori[0], valori[0], 0 };
 
             // Minimo e massimo
             float sum = 0;
@@ -138,7 +159,7 @@ public class StatsImpl implements Stats {
             }
             // Media
             valoriCalcolati.setMedia(sum / valori.length);
-            //stats[2] = sum / valori.length;
+
             // Aggiorna la HashMap
             numEvents.put(stato, valoriCalcolati);
         }

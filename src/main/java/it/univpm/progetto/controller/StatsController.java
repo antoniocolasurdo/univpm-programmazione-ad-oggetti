@@ -4,8 +4,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Vector;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,21 +37,18 @@ public class StatsController {
 	private Stats stats;
 
 	/**
-	 * <p>
-	 * Rotta che permette di recuperare il numero di eventi di ogni stato
-	 * <p>
-	 * @throws WrongPriceMaxException 
-	 * @throws WrongNegativePriceMinException 
-	 * @throws WrongStateException 
-	 * @throws WrongSegmentException 
-	 * @throws WrongGenreException 
-	 * @throws WrongStartDateException 
-	 * @throws WrongEndDateException 
-	 * @throws WrongFormatDateException 
+	 * <p>Rotta che permette di recuperare il numero di eventi di ogni stato</p>
+	 * 
+	 * @param filterManager è il gestore dei filtri
+	 *  
+	 * @throws ResponseStatusException Response status exception
+	 * 
+	 * @return numEvents
 	 */
 	@PostMapping("/stats/numEvents")
 	public HashMap<String, Integer> getNumEvents(@RequestBody(required = false) FilterManager filterManager) {
 		try {
+			// Se viene introdotto un filtro quindi filterManager non è nullo allora fa la validazione  
 			if (filterManager != null) {
 				filterManager.validate();
 				Vector<Event> filteredEvents = filterManager.filter(EventsData.getInstance().getEvents());
@@ -66,21 +67,17 @@ public class StatsController {
 	}
 
 	/**
-	 * <p>
-	 * Rotta che permette di recuperare il numero di eventi per genere
-	 * <p>
-	 * @throws WrongPriceMaxException 
-	 * @throws WrongNegativePriceMinException 
-	 * @throws WrongStateException 
-	 * @throws WrongSegmentException 
-	 * @throws WrongGenreException 
-	 * @throws WrongStartDateException 
-	 * @throws WrongEndDateException 
-	 * @throws WrongFormatDateException 
+	 * <p>Rotta che permette di recuperare il numero di eventi per genere</p>
+	 * @param filterManager è il gestore dei filtri
+	 * 
+	 * @throws ResponseStatusException Response status exception
+	 * 
+	 * @return numEventsGen
 	 */
 	@PostMapping("/stats/numEventsGenre")
 	public HashMap<String, int[]> getNumEventsGenre(@RequestBody(required = false) FilterManager filterManager) {
 		try {
+			// Se viene introdotto un filtro quindi filterManager non è nullo allora fa la validazione 
 			if (filterManager != null) {
 				filterManager.validate();
 				Vector<Event> filteredEvents = filterManager.filter(EventsData.getInstance().getEvents());
@@ -99,21 +96,18 @@ public class StatsController {
 	}
 
 	/**
-	 * <p>
-	 * Rotta che permette di recuperare l'insieme degli StateCode di tutti gli eventi
-	 * <p>
-	 * @throws WrongPriceMaxException 
-	 * @throws WrongNegativePriceMinException 
-	 * @throws WrongStateException 
-	 * @throws WrongSegmentException 
-	 * @throws WrongGenreException 
-	 * @throws WrongStartDateException 
-	 * @throws WrongEndDateException 
-	 * @throws WrongFormatDateException 
+	 * <p>Rotta che permette di recuperare l'insieme degli StateCode di tutti gli eventi</p>
+	 * 
+	 * @param filterManager è il gestore dei filtri
+	 * 
+	 * @throws ResponseStatusException Response status exception 
+	 * 
+	 * @return statesCodes
 	 */
 	@PostMapping("/stats/getStates")
 	public HashSet<String> getStates(@RequestBody(required = false) FilterManager filterManager) {
 		try {
+			// Se viene introdotto un filtro quindi filterManager non è nullo allora fa la validazione 
 			if (filterManager != null) {
 				filterManager.validate();
 				Vector<Event> filteredEvents = filterManager.filter(EventsData.getInstance().getEvents());
@@ -132,21 +126,20 @@ public class StatsController {
 	}
 
 	/**
-	 * <p>
-	 * Rotta che permette di recuperare l'insieme degli StateCode di tutti gli eventi
-	 * <p>
-	 * @throws WrongPriceMaxException 
-	 * @throws WrongNegativePriceMinException 
-	 * @throws WrongStateException 
-	 * @throws WrongSegmentException 
-	 * @throws WrongGenreException 
-	 * @throws WrongStartDateException 
-	 * @throws WrongEndDateException 
-	 * @throws WrongFormatDateException 
+	 * <p>Rotta che permette di recuperare l'insieme degli StateCode di tutti gli eventi</p>
+	 *
+	 * @param filterManager è il gestore dei filtri
+	 * @param weekNum numero di settimane richieste, il valore di default è 4
+	 * 
+	 * @throws ResponseStatusException Response status exception
+	 * 
+	 * @return numEvents
 	 */
+	@Validated
 	@PostMapping("/stats/numEventsInterval")
-	public HashMap<String, ValoriMinimoMassimoMedio> numEventsInterval(@RequestBody(required = false) FilterManager filterManager, @RequestParam(name = "weekNum", required = false, defaultValue = "4") int weekNum) {
+	public HashMap<String, ValoriMinimoMassimoMedio> numEventsInterval(@RequestBody(required = false) FilterManager filterManager, @RequestParam(name = "weekNum", required = false, defaultValue = "4") @Min(1) @Max(52) int weekNum) {
 		try {
+			// Se viene introdotto un filtro quindi filterManager non è nullo allora fa la validazione 
 			if (filterManager != null) {
 				filterManager.validate();
 				Vector<Event> filteredEvents = filterManager.filter(EventsData.getInstance().getEvents());

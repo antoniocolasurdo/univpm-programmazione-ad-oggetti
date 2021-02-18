@@ -5,7 +5,7 @@ package it.univpm.progetto.model;
  * 
  *         <p>
  *         <b>Classe</b> che definisce l'evento
- *         <p>
+ *         </p>
  */
 public abstract class Event {
 
@@ -31,7 +31,7 @@ public abstract class Event {
      * @param name   indica il nome dell'evento
      * @param info   indica l'info dell'evento
      * @param family indica se l'evento è per famiglie oppure no
-     * <p>
+     * </p>
      */
     public Event(String id, String name, String info, boolean family) {
         this.id = id;
@@ -43,11 +43,9 @@ public abstract class Event {
     public abstract String getGenre();
 
     /**
-     * <p>
-     * Ritorna l'id dell'evento
+     * <p>Ritorna l'id dell'evento<p>
      * 
      * @return id
-     * <p>
      */
     public String getId() {
         return id;
@@ -63,11 +61,9 @@ public abstract class Event {
     }
 
     /**
-     * <p>
-     * Ritorna il nome dell'evento
+     * <p>Ritorna il nome dell'evento<p>
      * 
      * @return name
-     * <p>
      */
     public String getName() {
         return name;
@@ -83,11 +79,9 @@ public abstract class Event {
     }
 
     /**
-     * <p>
-     * Ritorna la data dell'evento
+     * <p>Ritorna la data dell'evento<p>
      * 
      * @return dates
-     * <p>
      */
     public Dates getDates() {
         return dates;
@@ -103,11 +97,9 @@ public abstract class Event {
     }
 
     /**
-     * <p>
-     * Ritorna le info dell'evento
+     * <p>Ritorna le info dell'evento<p>
      * 
      * @return info
-     * <p>
      */
     public String getInfo() {
         return info;
@@ -122,11 +114,9 @@ public abstract class Event {
         this.info = info;
     }
     /**
-     * <p>
-     * Ritorna se è un evento per famiglie
+     * <p>Ritorna se è un evento per famiglie<p>
      * 
      * @return family
-     * <p>
      */
     public boolean isFamily() {
         return family;
@@ -141,11 +131,9 @@ public abstract class Event {
     }
 
     /**
-     * <p>
-     * Ritorna la fascia di prezzo dell'evento
+     * <p>Ritorna la fascia di prezzo dell'evento<p>
      * 
      * @return priceRange
-     *         <p>
      */
     public PriceRange getPriceRange() {
         return priceRange;
@@ -161,11 +149,9 @@ public abstract class Event {
     }
 
     /**
-     * <p>
-     * Definisce la località in cui si svolge l'evento
+     * <p>Definisce la località in cui si svolge l'evento<p>
      * 
      * @return venue
-     *         <p>
      */
     public Venue getVenue() {
         return venue;

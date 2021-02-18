@@ -23,14 +23,14 @@ public class WrongEndDateException extends Exception {
     /**
      * Costruttore
      * 
-     * @param message
+     * @param message messaggio d'errore
      */
     public WrongEndDateException(String message) {
         super(message);
     }
 	
 	/**
-	 * Questo metodo ritorna una stringa che descrive l'errore
+	 * <p>Questo metodo ritorna una stringa che descrive l'errore<p>
 	 * 
 	 * @return <code>String</code>
 	 */

@@ -6,37 +6,49 @@ import java.util.Vector;
 
 import it.univpm.progetto.model.Event;
 
+/**
+ * @author Antonio Colasurdo e Daniele Sergiacomi
+ * 
+ * <p>
+ * <b>Interfaccia</b> delle funzioni relative alle statistiche
+ * </p>
+ */
 public interface Stats {
 
     /**
-     * Restituisce il numero di eventi presenti in ogni stato
+     * <p>Restituisce il numero di eventi presenti in ogni stato</p>
      * 
-     * @return
+     * @param eventi lista degli eventi da elaborare
+     * 
+     * @return numEvents
      */
-    public HashMap<String, Integer> getNumEvents(Vector<Event> list);
+    public HashMap<String, Integer> getNumEvents(Vector<Event> eventi);
 
     /**
-     * Restituisce il numero di eventi presenti raggruppati per segmento e genere
+     * <p>Restituisce il numero di eventi presenti raggruppati per segmento e genere</p>
      * 
-     * @param eventi
-     * @return
+     * @param eventi lista degli eventi da elaborare
+     *  
+     * @return numEventsGen
      */
     public HashMap<String, int[]> getNumEventsGenre(Vector<Event> eventi);
 
     /**
-     * Restituisce l'insieme degli statescodes in cui si terranno gli eventi
+     * <p>Restituisce l'insieme degli statescodes in cui si terranno gli eventi</p>
      * 
-     * @param eventi
-     * @return
+     * @param eventi lista degli eventi da elaborare 
+     * 
+     * @return statesCodes
      */
     public HashSet<String> getStates(Vector<Event> eventi);
 
     /**
-     * Restituisce l'insieme dei valori minimo, massimo e medio degli eventi mensilmente e con date personalizzate
+     * <p>Restituisce l'insieme dei valori minimo, massimo e medio degli eventi mensilmente e con date personalizzate</p>
      * 
-     * @param eventi
-     * @param weekNum
-     * @return
+     * @param eventi lista degli eventi da elaborare
+     * @param weekNum numero di settimane prese
+     * 
+     * @return numEvents
      */
     public HashMap<String, ValoriMinimoMassimoMedio> numEventsInterval(Vector<Event> eventi, int weekNum);
 

@@ -12,13 +12,11 @@ import it.univpm.progetto.model.SportEvent;
 /**
  * @author Antonio Colasurdo e Daniele Sergiacomi
  * 
- *<p>
- *<b>Classe</b> che modella il filtro sulle classificazioni
- *(Music,Sports,Art&Theatre,Miscellaneous), sui vari generi e sottogeneri,
- *<b> estendendo la superclasse Filter.
- *<p>
+ * <p><b>Classe</b> che modella il filtro sulle classificazioni
+ * (Music, Sports, Art e Theatre, Miscellaneous) sui vari generi e sottogeneri
+ * estendendo la superclasse Filter.</p>
+ * 
  */
-
 public class SegmentFilter extends Filter {
 
     /**
@@ -30,7 +28,7 @@ public class SegmentFilter extends Filter {
     /**
      * Costruttore
      * 
-     * @param segment
+     * @param segment classificazione degli eventi
      */
     public SegmentFilter(String segment) {
         super();
@@ -85,6 +83,7 @@ public class SegmentFilter extends Filter {
         }
     }
 
+    // Recupera le eccezioni di classificazioni filtrate errate
     @Override
     public void validate() throws WrongSegmentException {
     	for (int index = 0; index < filteredSegments.length; index++) {

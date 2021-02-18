@@ -5,7 +5,7 @@ package it.univpm.progetto.model;
  * 
  * <p>
  * <b>Classe</b> che definisce la fascia di prezzo
- * <p>
+ * </p>
  */
 public class PriceRange {
 	
@@ -15,10 +15,9 @@ public class PriceRange {
     private float max;
 
     /**
-     * <p>
-     * Ritorna il prezzo minimo
+     * <p>Ritorna il prezzo minimo<p>
+     * 
      * @return min
-     * <p>
      */
 	public float getMin() {
 		return min;
@@ -32,10 +31,9 @@ public class PriceRange {
 		this.min = min;
 	}
 	   /**
-     * <p>
-     * Ritorna il prezzo massimo
+     * <p>Ritorna il prezzo massimo<p>
+     * 
      * @return max
-     * <p>
      */
 	public float getMax() {
 		return max;

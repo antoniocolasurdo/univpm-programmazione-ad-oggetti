@@ -5,7 +5,7 @@ package it.univpm.progetto.model;
  * 
  * <p>
  * <b>Classe</b> che definisce gli eventi di arte e teatro
- * <p>
+ * </p>
  */
 public class ArtsAndTheatreEvent extends Event {
 
@@ -20,10 +20,9 @@ public class ArtsAndTheatreEvent extends Event {
     }
 
     /**
-	 * <p>
-	 * Ritorna il genere dell'evento arte e teatro
+	 * <p>Ritorna il genere dell'evento arte e teatro<p>
+	 * 
 	 * @return artsAndTheatreGenre
-	 * <p>
 	 */
     @Override
     public String getGenre() {
@@ -38,10 +37,9 @@ public class ArtsAndTheatreEvent extends Event {
 		this.artsAndTheatreGenre = artsAndTheatreGenre;
 	}
 	/**
-	 * <p>
-	 * Ritorna il sottogenere dell'evento arte e teatro
+	 * <p>Ritorna il sottogenere dell'evento arte e teatro<p>
+	 * 
 	 * @return artsAndTheatreSubGenre
-	 * <p>
 	 */
 	public String getArtsAndTheatreSubGenre() {
 		return artsAndTheatreSubGenre;

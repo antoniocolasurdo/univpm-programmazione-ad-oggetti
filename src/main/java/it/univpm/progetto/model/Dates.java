@@ -8,7 +8,7 @@ import java.time.LocalTime;
  * 
  *         <p>
  *         <b>Classe</b> che definisce le date degli eventi
- *         <p>
+ *         </p>
  */
 public class Dates {
 
@@ -21,11 +21,9 @@ public class Dates {
     }
 
     /**
-     * <p>
-     * Ritorna la data locale dell'evento
+     * <p>Ritorna la data locale dell'evento<p>
      * 
      * @return LocalDate
-     *         <p>
      */
     public LocalDate getLocalDate() {
         return localDate;
@@ -41,11 +39,9 @@ public class Dates {
     }
 
     /**
-     * <p>
-     * Ritorna l'orario locale dell'evento
+     * <p>Ritorna l'orario locale dell'evento<p>
      * 
      * @return LocalTime
-     *         <p>
      */
     public LocalTime getLocalTime() {
         return localTime;
@@ -53,7 +49,7 @@ public class Dates {
 
     /**
      * 
-     * @param LocalTime indica l'orario dell'evento
+     * @param localTime indica l'orario dell'evento
      * 
      */
     public void setLocalTime(LocalTime localTime) {

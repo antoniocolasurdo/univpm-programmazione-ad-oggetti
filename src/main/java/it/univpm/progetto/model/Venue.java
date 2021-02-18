@@ -5,7 +5,7 @@ package it.univpm.progetto.model;
  * 
  * <p>
  * <b>Classe</b> che definisce le sedi dell'evento
- * <p>
+ * </p>
  */
 public class Venue {
 	
@@ -17,27 +17,25 @@ public class Venue {
 	private String stateCode;
 
 	/**
-	 * <p>
-	 * Ritorna il nome della città
+	 * <p>Ritorna il nome della città<p>
+	 * 
 	 * @return city
-	 * <p>
 	 */
 	public String getCityName() {
 		return cityName;
 	}
 	/**
 	 * 
-	 * @param city indica il nome della città
+	 * @param cityName indica il nome della città
 	 * 
 	 */
 	public void setCityName(String cityName) {
 		this.cityName = cityName;
 	}
 	/**
-	 * <p>
-	 * Ritorna il nome dello stato
+	 * <p>Ritorna il nome dello stato<p>
+	 * 
 	 * @return stateName
-	 * <p>
 	 */
 	public String getStateName() {
 		return stateName;
@@ -51,10 +49,9 @@ public class Venue {
 		this.stateName = stateName;
 	}
 	/**
-	 * <p>
-	 * Ritorna il codice dello stato
+	 * <p>Ritorna il codice dello stato<p>
+	 * 
 	 * @return stateCode
-	 * <p>
 	 */
 	public String getStateCode() {
 		return stateCode;

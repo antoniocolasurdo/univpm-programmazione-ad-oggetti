@@ -205,6 +205,12 @@ Le richieste che l'utente può effettuare tramite Postman devono essere effettua
 | POST | "/stats/numEventsInterval" | Recupera gli eventi minimo, massimo e medio per un intervallo di date personalizzato |
 
 
+Per la statistica numEventsGenre i generi sono così visualizzati:
+1. sport
+2. music
+3. theatre
+4. miscellaneous
+
 ### Filtri utilizzabili in tutte le rotte delle statistiche
 
 | BodyParameters | Description                                      | Type   | Example          |
@@ -289,7 +295,7 @@ es: non posso mettere come genere uno spazio vuoto se voglio filtrare per genere
 
 9) *GenericException*: viene generata per prevenire errori non gestiti
 
-
+Per ottenere il messaggio di errore generato dalle eccezioni sull'output di Postman, è stata abilitata questa funzionalità mediante un apposito parametro contenuto nel file <b>application.properties</b> in quanto di default è disabilitato in Spring Boot per questioni di sicurezzan
 
 
 # Test
@@ -334,4 +340,18 @@ Di seguito sono elencati i test unitari inseriti nel progetto:
 # Autori
 Il progetto è stato sviluppato da:
 
-@ Antonio Colasurdo & @ Daniele Sergiacomi.
+@ Antonio Colasurdo
+1. Configurazione
+2. Model
+3. Controller
+4. Service
+5. Test
+6. JavaDoc
+
+@ Daniele Sergiacomi
+1. Use case diagram
+2. Class diagram
+3. Sequence diagram
+4. Stats
+5. Filter
+6. Exception

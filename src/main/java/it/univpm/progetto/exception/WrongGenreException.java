@@ -25,14 +25,14 @@ public class WrongGenreException extends Exception {
     /**
      * Costruttore
      * 
-     * @param message
+     * @param message messaggio d'errore
      */
     public WrongGenreException(String message) {
         super(message);
     }
 
 	/**
-	 * Questo metodo ritorna una stringa che descrive l'errore
+	 * <p>Questo metodo ritorna una stringa che descrive l'errore<p>
 	 * 
 	 * @return <code>String</code>
 	 */

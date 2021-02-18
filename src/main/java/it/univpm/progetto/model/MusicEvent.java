@@ -5,7 +5,7 @@ package it.univpm.progetto.model;
  * 
  * <p>
  * <b>Classe</b> che definisce gli eventi musica
- * <p>
+ * </p>
  */
 public class MusicEvent extends Event {
 
@@ -22,10 +22,9 @@ public class MusicEvent extends Event {
 		this.musicGenre = musicGenre;
 	}
 	/**
-	 * <p>
-	 * Ritorna il sottogenere dell'evento di musica
+	 * <p>Ritorna il sottogenere dell'evento di musica<p>
+	 * 
 	 * @return musicSubGenre
-	 * <p>
 	 */
 	public String getMusicSubGenre() {
 		return musicSubGenre;
@@ -40,10 +39,9 @@ public class MusicEvent extends Event {
 	}
 	
 	/**
-	 * <p>
-	 * Ritorna il genere dell'evento di musica
+	 * <p>Ritorna il genere dell'evento di musica<p>
+	 * 
 	 * @return musicGenre
-	 * <p>
 	 */
     @Override
     public String getGenre() {

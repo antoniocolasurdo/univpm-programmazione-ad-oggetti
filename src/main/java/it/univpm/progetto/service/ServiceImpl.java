@@ -29,7 +29,7 @@ import it.univpm.progetto.model.*;
  * 
  * <p>
  * <b>Classe</b> che implementa tutte le funzioni relative alla lettura dei dati da TicketMaster e li recupera mettendo a disposizione i dati e metadati
- * <p>
+ * </p>
  */
 @org.springframework.stereotype.Service
 public class ServiceImpl implements Service {
@@ -60,11 +60,9 @@ public class ServiceImpl implements Service {
     private static int SIZE;
 	
     /**
-     * <p>
-     * Oggetto RestTemplate utilizzato per accedere all'API Get messa a disposizione da Ticket Master
+     * <p>Oggetto RestTemplate utilizzato per accedere all'API Get messa a disposizione da Ticket Master<p>
      * 
      * @see https://www.baeldung.com/
-     * <p>
      */
     @Autowired
     private RestTemplate restTemplate;
@@ -95,8 +93,8 @@ public class ServiceImpl implements Service {
 	/**
      * <p>
      * Funzione di lettura dati per leggere da TicketMaster in base ai parametri <i>PAGES</i> (numero di pagine) e per una grandezza pari a <i>SIZE</i>
-     * <p>
-	 * @throws GenericException 
+     * </p>
+	 * @throws GenericException eccezione generica
     */
 	@Override
 	public void readData() throws GenericException {
@@ -106,8 +104,8 @@ public class ServiceImpl implements Service {
 	/**
      * <p>
      * Funzione di lettura dati per leggere da TicketMaster in base ai parametri <i>PAGES</i> (numero di pagine) e per una grandezza pari a <i>SIZE</i>
-     * <p>
-	 * @throws GenericException 
+     * </p>
+	 * @throws GenericException eccezione generica
     */
 	@Override
 	public void readData(int pages, int size) throws GenericException {
@@ -138,6 +136,8 @@ public class ServiceImpl implements Service {
      * <p>
      * Metodo di recupero della struttura dei metadati in un oggetto Json
      * <p>
+     * 
+     * @return objectNode
      */
 	@Override
 	public JsonNode getMetaData() throws GenericException {
@@ -210,7 +210,9 @@ public class ServiceImpl implements Service {
 	/**
      * <p>
      * Metodo di recupero di tutti i dati che sono stati recuperati da Ticket Master
-     * <p>
+     * </p>
+     * 
+     * @return getData
      */
 	@Override
 	public List<Event> getData() throws GenericException {
@@ -222,6 +224,8 @@ public class ServiceImpl implements Service {
 	 * <p>
 	 * Funzione di costruzione della URL che accede a Ticket Master in base al numero di pagina
 	 * <p>
+	 * 
+	 * @return String
 	 */
 	private String getTicketMasterUrl(int page, int size) {
     	String result = "";

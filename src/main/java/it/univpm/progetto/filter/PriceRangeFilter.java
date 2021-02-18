@@ -11,9 +11,9 @@ import it.univpm.progetto.model.Event;
   * 
   * <p>
   * <b>Classe</b> che modella il filtro sul prezzo degli eventi, estendendo la superclasse Filter.
-  * <b>Utilizzando 2 valori di filtraggio, uno per l'estremo inferiore del prezzo PriceMin,
-  * <b>uno per l'estremo superiore del prezzo PriceMax.  
-  * <p>
+  *    Utilizzando 2 valori di filtraggio, uno per l'estremo inferiore del prezzo PriceMin,
+  *    uno per l'estremo superiore del prezzo PriceMax.  
+  * </p>
   */
 
 public class PriceRangeFilter extends Filter {
@@ -27,8 +27,8 @@ public class PriceRangeFilter extends Filter {
     /**
      * Costruttore
      * 
-     * @param PriceMin
-     * @param PriceMax
+     * @param PriceMin prezzo minimo
+     * @param PriceMax prezzo massimo
      */
     public PriceRangeFilter(float PriceMin, float PriceMax) {
         super();
@@ -56,6 +56,7 @@ public class PriceRangeFilter extends Filter {
         }
     }
 
+    // Recupera le eccezioni di prezzo minimo e massimo filtrati errati
     public void validate() throws WrongNegativePriceMinException, WrongPriceMaxException {
         if (priceMin != null && priceMin < 0)
             throw new WrongNegativePriceMinException("Il prezzo minimo non può essere negativo");

@@ -22,7 +22,9 @@ public class ServiceController {
 	/**
 	 * <p>
 	 * Rotta che permette di leggere i dati da TicketMaster e crea la struttura degli eventi con attribbuti e proprietà richieste dalle specifiche di progetto
-	 * <p>
+	 * </p>
+	 * 
+	 * @throws GenericException eccezione generica
 	 */
 	
 	@PostMapping("/readData")
@@ -33,7 +35,10 @@ public class ServiceController {
 	/**
 	 * <p>
 	 * Rotta che permette di recuperare i metadati 
-	 * <p>
+	 * </p>
+	 * 
+	 * @return ObjectNode
+	 * @throws GenericException eccezione generica
 	 */
 	@GetMapping("/getMetaData")
 	public JsonNode getMetaData() throws GenericException {
@@ -43,7 +48,11 @@ public class ServiceController {
 	/**
 	 * <p>
 	 * Rotta che permette di recuperare i dati di tutti gli eventi letti da TicketMaster
-	 * <p>
+	 * </p>
+	 * 
+	 * @return getData
+	 * 
+	 * @throws GenericException eccezione generica
 	 */
 	@GetMapping("/getData")
 	public List<Event> getData() throws GenericException {

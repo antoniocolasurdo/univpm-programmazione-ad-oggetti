@@ -5,7 +5,7 @@ package it.univpm.progetto.model;
  * 
  * <p>
  * <b>Classe</b> che definisce gli eventi sport
- * <p>
+ * </p>
  */
 public class SportEvent extends Event {
 
@@ -26,10 +26,9 @@ public class SportEvent extends Event {
 	}
 	
 	/**
-	 * <p>
-	 * Ritorna il genere dell'evento sport
+	 * <p>Ritorna il genere dell'evento sport<p>
+	 * 
 	 * @return sportGenre
-	 * <p>
 	 */
     @Override
     public String getGenre() {

@@ -10,7 +10,7 @@ import it.univpm.progetto.exception.*;
  * 
  * <p>
  * <b>Classe</b> che modella il filtro sui generi degli eventi, estendendo la superclasse Filter.
- * <p>
+ * </p>
  */
 
 public class GenreFilter extends Filter {
@@ -44,6 +44,7 @@ public class GenreFilter extends Filter {
         }
     }
 
+    // Recupera le eccezioni dovuto al genere filtrato sbagliato
     @Override
     public void validate() throws WrongGenreException {
     	for (int index = 0; index < filteredGenres.length; index++) {

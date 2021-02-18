@@ -5,7 +5,7 @@ package it.univpm.progetto.model;
  * 
  * <p>
  * <b>Classe</b> che definisce gli eventi sul ghiaccio
- * <p>
+ * </p>
  */
 public class MiscellaneousEvent extends Event {
 
@@ -26,10 +26,9 @@ public class MiscellaneousEvent extends Event {
     }
 
 	/**
-	 * <p>
-	 * Ritorna il genere dell'evento sul ghiaccio
+	 * <p>Ritorna il genere dell'evento sul ghiaccio<p>
+	 * 
 	 * @return miscellaneousGenre
-	 * <p>
 	 */
     @Override
     public String getGenre() {
