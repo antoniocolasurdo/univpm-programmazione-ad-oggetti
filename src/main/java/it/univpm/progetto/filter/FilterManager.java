@@ -38,8 +38,8 @@ public class FilterManager {
      * 
      */
     public FilterManager(@JsonProperty("segment") String segment, @JsonProperty("genre") String genre,
-            @JsonProperty("state") String stateCode, @JsonProperty("priceMin") Float priceMin,
-            @JsonProperty("priceMax") Float priceMax, @JsonProperty("startDate") String from,
+            @JsonProperty("state") String stateCode, @JsonProperty("priceMin") String priceMin,
+            @JsonProperty("priceMax") String priceMax, @JsonProperty("startDate") String from,
             @JsonProperty("endDate") String to) {
 
     	// Crea un nuovo vettore filtri che conterrà l'elenco dei filtri da applicare

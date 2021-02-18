@@ -21,8 +21,8 @@ public class PriceRangeFilter extends Filter {
     /**
      * Valori di intervallo di prezzo
      */
-    private Float priceMin;
-    private Float priceMax;
+    private float priceMin = -1f;
+    private float priceMax = -1f;
 
     /**
      * Costruttore
@@ -30,27 +30,30 @@ public class PriceRangeFilter extends Filter {
      * @param PriceMin prezzo minimo
      * @param PriceMax prezzo massimo
      */
-    public PriceRangeFilter(float PriceMin, float PriceMax) {
-        super();
-        this.priceMin = PriceMin;
-        this.priceMax = PriceMax;
+    public PriceRangeFilter(String priceMin, String priceMax) {
+    	if (priceMin != null) {
+            this.priceMin = Float.parseFloat(priceMin);
+    	}
+    	if (priceMax != null) {
+            this.priceMax = Float.parseFloat(priceMax);
+    	}
     }
 
     @Override
     public void filter(Vector<Event> eventi) {
-        if (priceMin != null) {
+        if (priceMin != -1f) {
             Iterator<Event> iter = eventi.iterator();
             while (iter.hasNext()) {
                 Event evento = iter.next(); // Prossimo evento
-                if (evento.getPriceRange().getMin() < priceMin)
+                if (evento.getPriceRange() == null || evento.getPriceRange().getMin() < priceMin)
                     iter.remove();
             }
         }
-        if (priceMax != null) {
+        if (priceMax != -1f) {
             Iterator<Event> iter = eventi.iterator();
             while (iter.hasNext()) {
                 Event evento = iter.next(); // Prossimo evento
-                if (evento.getPriceRange().getMax() > priceMax)
+                if (evento.getPriceRange() == null || evento.getPriceRange().getMax() > priceMax)
                     iter.remove();
             }
         }
@@ -58,9 +61,9 @@ public class PriceRangeFilter extends Filter {
 
     // Recupera le eccezioni di prezzo minimo e massimo filtrati errati
     public void validate() throws WrongNegativePriceMinException, WrongPriceMaxException {
-        if (priceMin != null && priceMin < 0)
+        if (priceMin != -1f && priceMin < 0)
             throw new WrongNegativePriceMinException("Il prezzo minimo non può essere negativo");
-        if (priceMin != null && priceMax != null && priceMax < priceMin)
+        if (priceMin != -1f && priceMax != -1f && priceMax < priceMin)
             throw new WrongPriceMaxException("Il prezzo massimo non può essere minore di quello minimo");
     }
 
