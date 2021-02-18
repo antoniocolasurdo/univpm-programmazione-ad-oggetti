@@ -119,6 +119,14 @@ Inoltre si è deciso di utilizzare una classe astratta *Event* per contenere nom
 
 
 
+​             <b>Package Data</b>
+
+![Data.png](https://github.com/antoniocolasurdo/univpm-programmazione-ad-oggetti/blob/main/Img/Diagramma%20delle%20Classi/Data.png?raw=true)
+
+Il package **Data** contiene la classe *EventsData* che contiene i dati degli eventi
+
+
+
 ​             <b>Package Filter</b>
 
 
@@ -141,6 +149,8 @@ Il package ***stats*** contiene l'interfaccia *Stats* che estende la classe *Sta
 *GetStates* si occupa di restituire il codice dello stato in cui si terranno gli eventi.                                                                                               *GetNumEvents* si occupa di restituire il numero di eventi presenti in ogni stato.
 *GetNumEventsGenre* restituisce il numero di eventi presenti raggruppati per segmento e genere.
 *numEventsInterval* Restituisce l'insieme dei valori minimo, massimo e medio degli eventi mensilmente e con date personalizzate.
+
+Quest'ultimo metodo contiene la classe *ValoriMinimoMassimoMedio* che contiene le variabili 'minimo' 'massimo' 'media' con i vari metodi get e set
 
 
 
